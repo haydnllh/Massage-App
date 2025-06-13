@@ -13,11 +13,9 @@ const getUsers = async (req, res, next) => {
 //Register user
 const registerUser = async (req, res, next) => {
   try {
-    const { username } = req.body;
+    const result = await User.register(req.body);
 
-    const result = await User.register(username);
-
-    if (!result.rowCount === 1) {
+    if (!(result.rowCount === 1)) {
       return res.status(400).json({ message: "Problem when registering user" });
     }
 
@@ -27,13 +25,12 @@ const registerUser = async (req, res, next) => {
   }
 };
 
-//Update users
+//Update user
 const updateUser = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const { username } = req.body;
 
-    const result = await User.update(id, username);
+    const result = await User.update(id, req.body);
 
     if (!(result.rowCount === 1)) {
       return res.status(404).json({ message: "User not found" });
@@ -45,8 +42,26 @@ const updateUser = async (req, res, next) => {
   }
 };
 
+//Delete user
+const deleteUser = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const result = await User.delete(id);
+
+    if (!(result.rowCount === 1)) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.status(201).json({ message: "User deleted" });
+  } catch (err) {
+    next(err);
+  }
+};
+
 module.exports = {
   getUsers,
   registerUser,
   updateUser,
+  deleteUser,
 };
