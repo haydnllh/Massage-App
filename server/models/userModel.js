@@ -1,7 +1,7 @@
 const pool = require("../config/pool");
 
 const User = {
-  async register({first_name, last_name, email, password_hash}) {
+  async register({ first_name, last_name, email, password_hash }) {
     return await pool.query(
       "INSERT INTO users (first_name, last_name, email, password_hash) VALUES ($1, $2, $3, $4)",
       [first_name, last_name, email, password_hash]
