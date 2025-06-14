@@ -1,10 +1,13 @@
 const pool = require("../config/pool");
+const bcrypt = require("bcryptjs");
 
 const User = {
-  async register({ first_name, last_name, email, password_hash }) {
+  async register({ first_name, last_name, email, password, isAdmin }) {
+    const password_hash = hash(password);
+
     return await pool.query(
-      "INSERT INTO users (first_name, last_name, email, password_hash) VALUES ($1, $2, $3, $4)",
-      [first_name, last_name, email, password_hash]
+      "INSERT INTO users (first_name, last_name, email, password_hash, isAdmin) VALUES ($1, $2, $3, $4, $5)",
+      [first_name, last_name, email, password_hash, isAdmin]
     );
   },
 
@@ -12,8 +15,8 @@ const User = {
     return await pool.query("SELECT * FROM users");
   },
 
-  async update(userId, newUser) {
-    const { first_name, last_name, email, password_hash } = newUser;
+  async update(user_id, newUser) {
+    const { first_name, last_name, email, password, isAdmin } = newUser;
     const updates = [];
     const values = [];
     let index = 1;
@@ -28,9 +31,15 @@ const User = {
       values.push(email);
     }
 
-    if (password_hash) {
+    if (password) {
+      const password_hash = hash(password);
       updates.push(`password_hash = $${index++}`);
       values.push(password_hash);
+    }
+
+    if (isAdmin) {
+      updates.push(`isAdmin = $${index++}`);
+      values.push(isAdmin);
     }
 
     if (updates.length === 0) return null;
@@ -38,7 +47,7 @@ const User = {
     const query = `
     UPDATE users
     SET ${updates.join(", ")}
-    WHERE user_id = ${userId}
+    WHERE user_id = ${user_id}
   `;
 
     const result = await pool.query(query, values);
@@ -46,9 +55,30 @@ const User = {
     return result;
   },
 
-  async delete(userId) {
-    return await pool.query("DELETE FROM users where user_id = ($1)", [userId]);
+  async delete(user_id) {
+    return await pool.query("DELETE FROM users where user_id = ($1)", [
+      user_id,
+    ]);
+  },
+
+  async login(email, password) {
+    const result = await pool.query(
+      "SELECT password_hash FROM users WHERE email = $1",
+      [email]
+    );
+
+    const user = result.rows[0];
+
+    if (!user) return false;
+
+    return await bcrypt.compare(password, user.password_hash);
   },
 };
+
+function hash(password) {
+  const salt = bcrypt.genSaltSync(10);
+  const hashed = bcrypt.hashSync(password, salt);
+  return hashed;
+}
 
 module.exports = User;

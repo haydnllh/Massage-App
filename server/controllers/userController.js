@@ -28,9 +28,9 @@ const registerUser = async (req, res, next) => {
 //Update user
 const updateUser = async (req, res, next) => {
   try {
-    const { id } = req.params;
+    const { user_id } = req.params;
 
-    const result = await User.update(id, req.body);
+    const result = await User.update(user_id, req.body);
 
     if (!(result.rowCount === 1)) {
       return res.status(404).json({ message: "User not found" });
@@ -45,9 +45,9 @@ const updateUser = async (req, res, next) => {
 //Delete user
 const deleteUser = async (req, res, next) => {
   try {
-    const { id } = req.params;
+    const { user_id } = req.params;
 
-    const result = await User.delete(id);
+    const result = await User.delete(user_id);
 
     if (!(result.rowCount === 1)) {
       return res.status(404).json({ message: "User not found" });
@@ -59,9 +59,23 @@ const deleteUser = async (req, res, next) => {
   }
 };
 
+//Login
+const loginUser = async (req, res, next) => {
+  try {
+    const { email, password } = req.body;
+
+    const result = await User.login(email, password);
+
+    res.status(201).json(result);
+  } catch (err) {
+    next(err);
+  }
+};
+
 module.exports = {
   getUsers,
   registerUser,
   updateUser,
   deleteUser,
+  loginUser,
 };
