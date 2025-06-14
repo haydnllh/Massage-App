@@ -1,4 +1,5 @@
 const User = require("../models/userModel");
+const jwt = require("jsonwebtoken");
 
 //Get all users
 const getUsers = async (req, res, next) => {
@@ -64,13 +65,24 @@ const loginUser = async (req, res, next) => {
   try {
     const { email, password } = req.body;
 
-    const result = await User.login(email, password);
+    const {password_hash: userPassword, ...rest} = await User.login(email, password);
 
-    res.status(201).json(result);
+    const token = jwt.sign({ user_id: rest.user_id }, process.env.JWT_SECRET);
+    res.cookie("jwt", token);
+    
+    res.status(201).json(rest);
   } catch (err) {
     next(err);
   }
 };
+
+//Logout
+const logoutUser = async(req, res, next) => {
+    res.cookie("jwt", " ", {
+        expiersIn: "-1"
+    });
+    return res.json({message: "Logged out"})
+}
 
 module.exports = {
   getUsers,
@@ -78,4 +90,5 @@ module.exports = {
   updateUser,
   deleteUser,
   loginUser,
+  logoutUser,
 };

@@ -15,6 +15,12 @@ const User = {
     return await pool.query("SELECT * FROM users");
   },
 
+  async getFromId(user_id) {
+    return await pool.query("SELECT * FROM users WHERE user_id = $1", [
+      user_id,
+    ]);
+  },
+
   async update(user_id, newUser) {
     const { first_name, last_name, email, password, isAdmin } = newUser;
     const updates = [];
@@ -62,16 +68,17 @@ const User = {
   },
 
   async login(email, password) {
-    const result = await pool.query(
-      "SELECT password_hash FROM users WHERE email = $1",
-      [email]
-    );
+    const result = await pool.query("SELECT * FROM users WHERE email = $1", [
+      email,
+    ]);
 
     const user = result.rows[0];
 
-    if (!user) return false;
+    if (!user) return null;
 
-    return await bcrypt.compare(password, user.password_hash);
+    const isMatch = await bcrypt.compare(password, user.password_hash);
+
+    return isMatch ? user : null;
   },
 };
 
