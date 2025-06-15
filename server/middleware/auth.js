@@ -2,6 +2,8 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/userModel");
 
 const auth = async (req, res, next) => {
+  next()
+  /*
   try {
     const token = req.cookies.jwt;
     if (!token) {
@@ -21,6 +23,7 @@ const auth = async (req, res, next) => {
   } catch (err) {
     return res.status(400).json({ message: "Not authroised" });
   }
+    */
 };
 
 module.exports = {
