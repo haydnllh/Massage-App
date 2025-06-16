@@ -1,6 +1,15 @@
 import { useState } from "react";
+import { registerUser, reset } from "../../features/auth/authSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const Register = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const { user, isSuccess } = useSelector((state) => state.auth);
+
   const [formData, setFormData] = useState({
     first_name: "",
     last_name: "",
@@ -10,10 +19,30 @@ const Register = () => {
 
   const { first_name, last_name, email, password } = formData;
 
-  const handleChange = (e) => {};
+  useEffect(() => {
+    if (isSuccess) {
+      navigate("/login");
+      dispatch(reset());
+    }
+  }, [isSuccess, user, dispatchEvent, navigate]);
+
+  const handleChange = (e) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const dataToSubmit = {
+      first_name,
+      last_name,
+      email,
+      password,
+    };
+
+    dispatch(registerUser(dataToSubmit));
   };
 
   return (
@@ -27,6 +56,7 @@ const Register = () => {
             <input
               type="text"
               placeholder="Enter your first name"
+              name="first_name"
               value={first_name}
               onChange={handleChange}
             />
@@ -37,6 +67,7 @@ const Register = () => {
             <input
               type="text"
               placeholder="Enter your last name"
+              name="last_name"
               value={last_name}
               onChange={handleChange}
             />
@@ -47,6 +78,7 @@ const Register = () => {
             <input
               type="email"
               placeholder="Enter your email"
+              name="email"
               value={email}
               onChange={handleChange}
             />
@@ -57,11 +89,12 @@ const Register = () => {
             <input
               type="password"
               placeholder="Enter password"
+              name="password"
               value={password}
               onChange={handleChange}
             />
           </div>
-          
+
           <button type="submit">Submit</button>
         </form>
       </div>

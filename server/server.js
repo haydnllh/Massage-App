@@ -4,12 +4,14 @@ const app = express();
 const { errorHandler } = require("./middleware/errorHandler");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
+const morgan = require("morgan");
 
 const port = process.env.PORT || 5000;
 
 app.use(cookieParser());
 app.use(express.json());
 app.use(cors());
+app.use(morgan("dev"));
 
 const userRoutes = require("./routes/userRoutes");
 const bookingRoutes = require("./routes/bookingRoutes");
