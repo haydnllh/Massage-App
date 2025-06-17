@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "nodemon server/server.js",
-    "admin": "npm --prefix admin run dev",
-    "dev": "concurrently \"npm run server\" \" npm run admin \""
+    "frontend": "npm --prefix frontend run dev",
+    "dev": "concurrently \"npm run server\" \" npm run frontend \""
   },
   "keywords": [],
   "author": "",

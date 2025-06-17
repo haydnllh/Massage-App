@@ -1,17 +1,11 @@
 import "./header.styles.scss";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { logoutUser, reset } from "../../features/auth/authSlice";
+import LogoutButton from "../LogoutButton/LogoutButton";
 
 const Header = () => {
   const { user } = useSelector((state) => state.auth);
-  const dispatch = useDispatch();
 
-  const handleLogout = async () => {
-    dispatch(logoutUser());
-    dispatch(reset());
-  };
   return (
     <header className="main-header">
       <div className="container">
@@ -22,9 +16,16 @@ const Header = () => {
         <nav>
           <Link to="/">Home</Link>
           {user ? (
-            <>
-              <button onClick={handleLogout}>Logout</button>
-            </>
+            user.isadmin ? (
+              <>
+                <Link to="/dashboard">Dashboard</Link>
+                <LogoutButton />
+              </>
+            ) : (
+              <>
+                <LogoutButton />
+              </>
+            )
           ) : (
             <>
               <Link to="/login">Login</Link>

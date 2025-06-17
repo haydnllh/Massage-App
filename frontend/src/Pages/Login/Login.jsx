@@ -17,8 +17,8 @@ const Login = () => {
   const { email, password } = formData;
 
   useEffect(() => {
-    if (isSuccess) {
-      navigate("/dashboard");
+    if (isSuccess && user) {
+      user.isadmin ? navigate("/dashboard") : navigate("/");
       dispatch(reset());
     }
   }, [isSuccess, user, dispatchEvent, navigate]);

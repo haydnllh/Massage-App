@@ -31,7 +31,6 @@ export const loginUser = createAsyncThunk(
   "auth/login",
   async (userData, thunkApi) => {
     try {
-      console.log(userData);
       const res = await fetch("/api/users/login", {
         headers: {
           "Content-Type": "application/json",
@@ -58,7 +57,7 @@ export const logoutUser = createAsyncThunk(
   "auth/logout",
   async (_, thunkApi) => {
     try {
-      const res = await fetch("/api/user/logout");
+      const res = await fetch("/api/users/logout");
 
       if (!res.ok) {
         const error = await res.json();
@@ -67,7 +66,7 @@ export const logoutUser = createAsyncThunk(
 
       const data = await res.json();
 
-      localStorage.removeItem("user")
+      localStorage.removeItem("user");
       return data;
     } catch (err) {}
   }
@@ -86,7 +85,6 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     reset: (state) => {
-      console.log("reset");
       state.isLoading = false;
       state.isSuccess = false;
       state.isError = false;
@@ -133,7 +131,7 @@ export const authSlice = createSlice({
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
-      })
+      });
   },
 });
 
