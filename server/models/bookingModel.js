@@ -11,8 +11,8 @@ const Booking = {
   async add({ user_id, item_id, booking_date, start_time, end_time }) {
     const time = new Date();
 
-    return await pool.query(
-      "INSERT INTO bookings (user_id, item_id, booking_date, start_time, end_time, status, created_at, updated_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)",
+    const result = await pool.query(
+      "INSERT INTO bookings (user_id, item_id, booking_date, start_time, end_time, status, created_at, updated_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *",
       [
         user_id,
         item_id,
@@ -24,6 +24,10 @@ const Booking = {
         time,
       ]
     );
+
+    const booking = result.rows[0];
+
+    return booking ? booking : null;
   },
 
   async removeBookings(userId, bookingIds) {

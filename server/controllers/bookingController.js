@@ -20,8 +20,8 @@ const addBooking = async (req, res, next) => {
 
     const result = await Booking.add(booking);
 
-    result.rowCount === 1
-      ? res.status(201).json({ message: "Booking confirmed" })
+    result
+      ? res.status(201).json(result)
       : res.status(400).json({ message: "Problem when booking" });
   } catch (err) {
     next(err);

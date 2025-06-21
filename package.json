@@ -30,6 +30,7 @@
     "sass": "^1.89.2"
   },
   "devDependencies": {
-    "concurrently": "^8.2.2"
+    "concurrently": "^8.2.2",
+    "eslint-plugin-baseui": "^13.0.0"
   }
 }

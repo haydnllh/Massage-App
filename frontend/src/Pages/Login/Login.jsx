@@ -7,7 +7,7 @@ import { useEffect } from "react";
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { user, isSuccess } = useSelector((state) => state.auth);
+  const { user, isSuccess } = useSelector(state => state.auth);
 
   const [formData, setFormData] = useState({
     email: "",
@@ -21,7 +21,7 @@ const Login = () => {
       user.isadmin ? navigate("/dashboard") : navigate("/");
       dispatch(reset());
     }
-  }, [isSuccess, user, dispatchEvent, navigate]);
+  }, [isSuccess, user]);
 
   const handleChange = (e) => {
     setFormData((prevState) => ({

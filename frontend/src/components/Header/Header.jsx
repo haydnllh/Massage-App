@@ -23,11 +23,13 @@ const Header = () => {
               </>
             ) : (
               <>
+                <Link to="/bookings">Booking</Link>
                 <LogoutButton />
               </>
             )
           ) : (
             <>
+              <Link to="/bookings">Booking</Link>
               <Link to="/login">Login</Link>
               <Link to="/register">Register</Link>
             </>

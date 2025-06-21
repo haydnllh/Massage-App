@@ -65,11 +65,14 @@ const loginUser = async (req, res, next) => {
   try {
     const { email, password } = req.body;
 
-    const {password_hash: userPassword, ...rest} = await User.login(email, password);
+    const { password_hash: userPassword, ...rest } = await User.login(
+      email,
+      password
+    );
 
     const token = jwt.sign({ user_id: rest.user_id }, process.env.JWT_SECRET);
     res.cookie("jwt", token);
-    
+
     res.status(201).json(rest);
   } catch (err) {
     next(err);
@@ -77,12 +80,12 @@ const loginUser = async (req, res, next) => {
 };
 
 //Logout
-const logoutUser = async(req, res, next) => {
-    res.cookie("jwt", " ", {
-        expiersIn: "-1"
-    });
-    return res.status(201).json({message: "Logged out"})
-}
+const logoutUser = async (req, res, next) => {
+  res.cookie("jwt", " ", {
+    expiersIn: "-1",
+  });
+  return res.status(201).json({ message: "Logged out" });
+};
 
 module.exports = {
   getUsers,

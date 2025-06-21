@@ -2,11 +2,19 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const user = JSON.parse(localStorage.getItem("user"));
 
+const initialState = {
+  user: user ? user : null,
+  isLoading: false,
+  isSuccess: false,
+  isError: false,
+  message: "",
+};
+
 export const registerUser = createAsyncThunk(
   "auth/register",
   async (userData, thunkApi) => {
     try {
-      const res = await fetch(`/api/users`, {
+      const res = await fetch("/api/users", {
         headers: {
           "Content-Type": "application/json",
         },
@@ -68,17 +76,11 @@ export const logoutUser = createAsyncThunk(
 
       localStorage.removeItem("user");
       return data;
-    } catch (err) {}
+    } catch (err) {
+      return thunkApi.rejectWithValue(err.message);
+    }
   }
 );
-
-const initialState = {
-  user: user ? user : null,
-  isLoading: false,
-  isSuccess: false,
-  isError: false,
-  message: "",
-};
 
 export const authSlice = createSlice({
   name: "auth",
