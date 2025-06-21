@@ -32,7 +32,7 @@ a {
   }
   label {
     display: block;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
   }
   input {
     display: block;
@@ -50,6 +50,16 @@ a {
     padding: 1rem 0rem;
     font-size: 1rem;
     cursor: pointer;
+    margin-bottom: 1rem;
+  }
+
+  #register {
+    max-width: max-content;
+    margin: 0 auto;
+    a:hover {
+      color: rgb(52, 52, 52);
+      text-decoration: underline;
+    }
   }
 }
 
