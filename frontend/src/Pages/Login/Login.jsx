@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { loginUser, reset } from "../../features/auth/authSlice";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useEffect } from "react";
 
 const Login = () => {
@@ -71,7 +71,7 @@ const Login = () => {
 
           <button type="submit">Submit</button>
         </form>
-        <p id="register">Don't have an account? <a href="/register">Register</a></p>
+        <p id="register">Don't have an account? <Link to="/register">Register</Link></p>
       </div>
     </div>
   );

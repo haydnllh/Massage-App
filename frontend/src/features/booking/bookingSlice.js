@@ -40,7 +40,7 @@ export const bookingSlice = createSlice({
   initialState,
   reducers: {
     reset: (state) => {
-      booking = null
+      state.booking = null
       state.isLoading = false;
       state.isSuccess = false;
       state.isError = false;

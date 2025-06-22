@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -15,8 +15,10 @@ const disabledDatesJs = disabledDates.map((date) => dayjs(date));
 const Availability = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
   const { isSuccess } = useSelector((state) => state.booking);
   const { user } = useSelector((state) => state.auth);
+  const item_id = location.state;
 
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
@@ -41,13 +43,12 @@ const Availability = () => {
 
     const user_id = user.user_id;
     const booking = {
-      item_id: 1,
+      item_id: item_id,
       booking_date: combined.format("YYYY-MM-DD"),
-      start_time: combined.format("hh:mm"),
+      start_time: combined.format("HH:mm"),
       end_time: combined.add(2, "hour").format("hh:mm"),
     };
 
-    //Todo: use different items
     const dataToSubmit = {
       user_id,
       booking,
@@ -69,6 +70,7 @@ const Availability = () => {
           onChange={(newTime) => setSelectedTime(newTime)}
           disabled={!selectedDate}
           timezone="default"
+          ampm={false}
         />
       </LocalizationProvider>
       <button className="submit" onClick={handleSubmit}>

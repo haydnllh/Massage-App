@@ -15,6 +15,10 @@ a {
   margin: 0 auto;
 }
 
+.booking{
+    display: flex;
+}
+
 .heading {
   font-size: 2rem;
   font-weight: 300;
@@ -71,4 +75,25 @@ a {
   padding: 1rem 0rem;
   font-size: 1rem;
   cursor: pointer;
+}
+
+.bookingImage{
+  max-width: 300px;
+  max-height: auto;
+  cursor: pointer;
+}
+
+.bookingVbox{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 300px;
+  margin: 0 5px;
+}
+
+.bookButton {
+  max-width: 200px;
+  border: 0;
+  text-align: center;
 }
