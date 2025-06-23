@@ -8,6 +8,10 @@ import Header from "./components/Header/Header";
 import Booking from "./Pages/Booking/Booking";
 import Availability from "./Pages/Booking/Availability";
 import Confirmation from "./Pages/Booking/Confirmation";
+import {
+  UserProtectedRoutes,
+  AdminProtectedRoutes,
+} from "./config/ProtectedRoutes";
 
 const App = () => {
   return (
@@ -17,10 +21,14 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="register" element={<Register />} />
-        <Route path="/dashboard" element={<Dashboard />}></Route>
-        <Route path="/bookings" element={<Booking />}></Route>
-        <Route path="/bookings/availability" element={<Availability />} />
-        <Route path="/bookings/confirmation" element={<Confirmation />} />
+        <Route path="/bookings" element={<Booking />} />
+        <Route element={<UserProtectedRoutes />}>
+          <Route path="/bookings/availability" element={<Availability />} />
+          <Route path="/bookings/confirmation" element={<Confirmation />} />
+        </Route>
+        <Route element={<AdminProtectedRoutes />}>
+          <Route path="/dashboard" element={<Dashboard />}></Route>
+        </Route>
       </Routes>
     </Router>
   );
