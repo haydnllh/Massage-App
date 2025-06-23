@@ -1,15 +1,20 @@
-import { useSelector } from "react-redux";
-import { useNavigate, Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { ItemIds } from "../../config/itemIds";
+import { setItemId } from "../../features/booking/bookingSlice";
+import "./booking.styles.scss"
 
 const Booking = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
 
-  const handleClick = (item_id) =>
+  const handleClick = (item_id) => {
+    dispatch(setItemId(item_id))
     user
-      ? navigate("/bookings/availability", { state: item_id })
+      ? navigate("/bookings/availability")
       : navigate("/login");
+  }
 
   return (
     <div className="container booking">

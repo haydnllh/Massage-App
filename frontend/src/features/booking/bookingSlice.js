@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const initialState = {
   booking: null,
+  item_id: null,
   isLoading: false,
   isSuccess: false,
   isError: false,
@@ -40,11 +41,15 @@ export const bookingSlice = createSlice({
   initialState,
   reducers: {
     reset: (state) => {
-      state.booking = null
+      state.booking = null;
+      state.item_id = null;
       state.isLoading = false;
       state.isSuccess = false;
       state.isError = false;
       state.message = "";
+    },
+    setItemId: (state, action) => {
+      state.item_id = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -65,5 +70,5 @@ export const bookingSlice = createSlice({
   },
 });
 
-export const { reset } = bookingSlice.actions;
+export const { reset, setItemId } = bookingSlice.actions;
 export default bookingSlice.reducer;

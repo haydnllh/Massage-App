@@ -7,7 +7,8 @@ import { useEffect } from "react";
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { user, isSuccess } = useSelector(state => state.auth);
+  const { user, isSuccess } = useSelector((state) => state.auth);
+  const { item_id } = useSelector((state) => state.booking);
 
   const [formData, setFormData] = useState({
     email: "",
@@ -18,8 +19,13 @@ const Login = () => {
 
   useEffect(() => {
     if (isSuccess && user) {
-      user.isadmin ? navigate("/dashboard") : navigate("/");
-      dispatch(reset());
+      if (item_id) {
+        navigate("/bookings/availability");
+      } else if (user.isadmin) {
+        navigate("/dashboard");
+      } else {
+        navigate("/");
+      }
     }
   }, [isSuccess, user]);
 
@@ -71,7 +77,9 @@ const Login = () => {
 
           <button type="submit">Submit</button>
         </form>
-        <p id="register">Don't have an account? <Link to="/register">Register</Link></p>
+        <p id="register">
+          Don't have an account? <Link to="/register">Register</Link>
+        </p>
       </div>
     </div>
   );

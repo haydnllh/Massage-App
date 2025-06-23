@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
-import { createBooking, reset } from "../../features/booking/bookingSlice";
+import { createBooking } from "../../features/booking/bookingSlice";
 
 const disabledDates = ["2025-06-19"];
 
@@ -15,10 +15,8 @@ const disabledDatesJs = disabledDates.map((date) => dayjs(date));
 const Availability = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
-  const { isSuccess } = useSelector((state) => state.booking);
+  const { isSuccess, item_id } = useSelector((state) => state.booking);
   const { user } = useSelector((state) => state.auth);
-  const item_id = location.state;
 
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
