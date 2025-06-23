@@ -8,6 +8,16 @@ const Booking = {
     );
   },
 
+  async getAllBookings() {
+    return await pool.query(`SELECT * FROM bookings`);
+  },
+
+  async getBookingList() {
+    return await pool.query(
+      "SELECT first_name, last_name, email, booking_date, item_id, start_time, end_time FROM bookings LEFT JOIN users on users.user_id = bookings.user_id"
+    );
+  },
+
   async add({ user_id, item_id, booking_date, start_time, end_time }) {
     const time = new Date();
 

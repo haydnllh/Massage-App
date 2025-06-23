@@ -19,7 +19,7 @@ const Login = () => {
 
   useEffect(() => {
     if (isSuccess && user) {
-      if (item_id) {
+      if (item_id && !user.isadmin) {
         navigate("/bookings/availability");
       } else if (user.isadmin) {
         navigate("/dashboard");
@@ -59,8 +59,10 @@ const Login = () => {
               type="email"
               placeholder="Enter your email"
               name="email"
+              id="email"
               value={email}
               onChange={handleChange}
+              autoComplete="email"
             />
           </div>
 
@@ -70,6 +72,7 @@ const Login = () => {
               type="password"
               placeholder="Enter password"
               name="password"
+              id="password"
               value={password}
               onChange={handleChange}
             />

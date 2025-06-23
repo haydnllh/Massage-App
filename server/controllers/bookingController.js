@@ -12,6 +12,24 @@ const getUserBookings = async (req, res, next) => {
   }
 };
 
+const getAllBookings = async (req, res, next) => {
+  try {
+    const result = await Booking.getAllBookings();
+    res.json(result.rows);
+  } catch (err) {
+    next(err);
+  }
+};
+
+const getBookingList = async (req, res, next) => {
+  try {
+    const result = await Booking.getBookingList();
+    res.json(result.rows);
+  } catch (err) {
+    next(err);
+  }
+}
+
 //Adding bookings
 const addBooking = async (req, res, next) => {
   try {
@@ -45,6 +63,8 @@ const removeBookings = async (req, res, next) => {
 
 module.exports = {
   getUserBookings,
+  getAllBookings,
+  getBookingList,
   addBooking,
   removeBookings,
 };

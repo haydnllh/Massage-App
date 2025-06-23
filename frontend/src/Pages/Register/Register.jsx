@@ -57,8 +57,10 @@ const Register = () => {
               type="text"
               placeholder="Enter your first name"
               name="first_name"
+              id="first_name"
               value={first_name}
               onChange={handleChange}
+              autoComplete="first_name"
             />
           </div>
 
@@ -68,6 +70,7 @@ const Register = () => {
               type="text"
               placeholder="Enter your last name"
               name="last_name"
+              id="last_name"
               value={last_name}
               onChange={handleChange}
             />
@@ -79,8 +82,10 @@ const Register = () => {
               type="email"
               placeholder="Enter your email"
               name="email"
+              id="email"
               value={email}
               onChange={handleChange}
+              autoComplete="email"
             />
           </div>
 
@@ -90,6 +95,7 @@ const Register = () => {
               type="password"
               placeholder="Enter password"
               name="password"
+              id="password"
               value={password}
               onChange={handleChange}
             />
