@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { fetchAllBookings } from "../../api/bookings";
 import BookingList from "../../components/BookingList/BookingList";
+import Calendar from "../../components/Calendar/Calendar"
 
 const Dashboard = () => {
   const [bookings, setBookings] = useState([]);
@@ -27,7 +28,7 @@ const Dashboard = () => {
   return (
     <div>
       <h1 className="heading center">Dashboard</h1>
-      <BookingList data={bookings}/>
+      <Calendar />
     </div>
   );
 };
