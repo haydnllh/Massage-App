@@ -4,10 +4,8 @@ const Home = () => {
   return (
     <div className="container">
       <div className="image-container">
-        <h1 className="heading center">Home</h1>
         <img
-          src="reception.jpg"
-          alt="Reception"
+          src="massage-1929064_1920.jpg"
           className="home-image reception"
         />
         <div>
