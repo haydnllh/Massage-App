@@ -1,14 +1,48 @@
-.home-image {
-  margin: 0 10px;
-  max-width: 45%;
+img {
+  display: block;
 }
 
-.reception {
-  max-width: 90%;
-  max-height: 500px;
+.main {
+  max-width: 100%;
+  height: 400px;
+  object-fit: cover;
 }
 
-.image-container {
+.main-image-container {
+  width: 100%;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  animation: translation 2s ease;
+}
+
+.main-image-text-container {
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  translate: 0 -50%;
+  width: 25%;
+  height: auto;
+}
+
+.main-image-button {
+  background-color: transparent;
+  color: white;
+  font-size: 3.5rem;
+  border: transparent;
+  text-decoration: underline;
+  width: 100%;
+  height: auto;
+}
+
+@keyframes translation {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }

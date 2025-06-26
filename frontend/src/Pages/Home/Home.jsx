@@ -1,16 +1,22 @@
+import { useNavigate } from "react-router-dom";
 import "./home.scss";
 
 const Home = () => {
+  const navigate = useNavigate();
+
   return (
-    <div className="container">
-      <div className="image-container">
-        <img
-          src="massage-1929064_1920.jpg"
-          className="home-image reception"
-        />
-        <div>
-          <img src="front.jpg" alt="Shop front" className="home-image" />
-          <img src="bed.jpg" alt="Bed" className="home-image" />
+    <div>
+      <div className="main-image-container">
+        <img src="chinese-medicine-3666269_1280.jpg" className="main"></img>
+        <div className="main-image-text-container">
+          <button
+            className="main-image-button"
+            onClick={() => {
+              navigate("/bookings");
+            }}
+          >
+            Book Now
+          </button>
         </div>
       </div>
     </div>

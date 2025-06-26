@@ -17,19 +17,21 @@ const App = () => {
   return (
     <Router>
       <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="register" element={<Register />} />
-        <Route path="/bookings" element={<Booking />} />
-        <Route element={<UserProtectedRoutes />}>
-          <Route path="/bookings/availability" element={<Availability />} />
-          <Route path="/bookings/confirmation" element={<Confirmation />} />
-        </Route>
-        <Route element={<AdminProtectedRoutes />}>
-          <Route path="/dashboard" element={<Dashboard />}></Route>
-        </Route>
-      </Routes>
+      <div className="page-content">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="register" element={<Register />} />
+          <Route path="/bookings" element={<Booking />} />
+          <Route element={<UserProtectedRoutes />}>
+            <Route path="/bookings/availability" element={<Availability />} />
+            <Route path="/bookings/confirmation" element={<Confirmation />} />
+          </Route>
+          <Route element={<AdminProtectedRoutes />}>
+            <Route path="/dashboard" element={<Dashboard />}></Route>
+          </Route>
+        </Routes>
+      </div>
     </Router>
   );
 };
