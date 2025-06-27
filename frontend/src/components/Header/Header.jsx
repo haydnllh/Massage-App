@@ -23,7 +23,7 @@ const Header = () => {
       navigate("/");
     };
 
-    return <button onClick={handleLogout}>Logout</button>;
+    return <button className="logout-button" onClick={handleLogout}>Logout</button>;
   };
 
   return (
@@ -48,7 +48,7 @@ const Header = () => {
               <Link to="/dashboard" onClick={() => setMenuOpen(false)}>
                 Dashboard
               </Link>
-              <LogoutButton />
+              <LogoutButton/>
             </>
           ) : (
             <>
@@ -61,7 +61,7 @@ const Header = () => {
               >
                 Book Online
               </button>
-              <LogoutButton />
+              <LogoutButton/>
             </>
           )
         ) : (

@@ -11,12 +11,14 @@ a {
 
 .page-content{
   padding-top: 90px;
+  min-height: calc(100vw - 232px - 78px);
 }
 
 .container {
   width: 1200px;
   max-width: 90%;
   margin: 0 auto;
+  padding-top: 2rem;
 }
 
 .heading {

@@ -100,3 +100,22 @@
     }
   }
 }
+
+
+.logout-button {
+  border: transparent;
+  background-color: transparent;
+  text-decoration: underline;
+  font-family: "IBM Plex Sans JP";
+  font-size: 0.8rem;
+
+  &:hover{
+    color:#414141;
+  }
+
+  @media (max-width: 768px){
+    text-decoration: none;
+    font-size: 1rem;
+    border-bottom: 1px solid #ddd;
+  }
+}

@@ -12,6 +12,7 @@ import {
   UserProtectedRoutes,
   AdminProtectedRoutes,
 } from "./config/ProtectedRoutes";
+import Footer from "./components/Contact/Footer"
 
 const App = () => {
   return (
@@ -32,6 +33,7 @@ const App = () => {
           </Route>
         </Routes>
       </div>
+      <Footer />
     </Router>
   );
 };

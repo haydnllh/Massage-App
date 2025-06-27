@@ -21,7 +21,7 @@ const Confirmation = () => {
   }, []);
 
   return (
-    <>
+    <div className="container">
       <h1 className="heading center">Confirmation</h1>
       <div>
         <h2>Date: {date}</h2>
@@ -29,7 +29,7 @@ const Confirmation = () => {
         <h2>End Time: {booking.end_time}</h2>
         <h2>Treatment Type: {ItemNames[booking.item_id]}</h2>
       </div>
-    </>
+    </div>
   );
 };
 
