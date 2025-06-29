@@ -1,4 +1,4 @@
-import "./header.styles.scss";
+import "./header.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useState } from "react";
@@ -23,7 +23,11 @@ const Header = () => {
       navigate("/");
     };
 
-    return <button className="logout-button" onClick={handleLogout}>Logout</button>;
+    return (
+      <button className="logout-button" onClick={handleLogout}>
+        Logout
+      </button>
+    );
   };
 
   return (
@@ -48,7 +52,7 @@ const Header = () => {
               <Link to="/dashboard" onClick={() => setMenuOpen(false)}>
                 Dashboard
               </Link>
-              <LogoutButton/>
+              <LogoutButton />
             </>
           ) : (
             <>
@@ -61,7 +65,7 @@ const Header = () => {
               >
                 Book Online
               </button>
-              <LogoutButton/>
+              <LogoutButton />
             </>
           )
         ) : (

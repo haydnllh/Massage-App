@@ -1,51 +1,53 @@
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap");
 
-img {
-  display: block;
-}
-
-.main {
-  max-width: 100%;
-  height: 400px;
-  object-fit: cover;
-}
-
-.main-image-container {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  position: relative;
-  animation: translation 2s ease;
-}
-
-.main-image-text-container {
-  position: absolute;
-  top: 50%;
-  left: 10%;
-  translate: 0 -50%;
-  width: 25%;
-  height: auto;
-}
-
-.main-image-button {
-  background-color: transparent;
-  color: white;
-  font-size: 3.5rem;
-  border: transparent;
-  text-decoration: underline;
-  width: 100%;
-  height: auto;
-  font-weight: bold;
-}
-
-@keyframes translation {
-  from {
-    transform: translateX(-100%);
-    opacity: 0;
+.home {
+  img {
+    display: block;
   }
-  to {
-    transform: translateX(0);
-    opacity: 1;
+
+  .main {
+    max-width: 100%;
+    height: 400px;
+    object-fit: cover;
+  }
+
+  .main-image-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+    animation: translation 2s ease;
+  }
+
+  .main-image-text-container {
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    translate: 0 -50%;
+    width: 25%;
+    height: auto;
+  }
+
+  .main-image-button {
+    background-color: transparent;
+    color: white;
+    font-size: 3.5rem;
+    border: transparent;
+    text-decoration: underline;
+    width: 100%;
+    height: auto;
+    font-weight: bold;
+  }
+
+  @keyframes translation {
+    from {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
   }
 }

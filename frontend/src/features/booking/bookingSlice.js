@@ -50,6 +50,7 @@ export const bookingSlice = createSlice({
     },
     setItemId: (state, action) => {
       state.item_id = action.payload;
+      localStorage.setItem("item_id", action.payload);
     },
   },
   extraReducers: (builder) => {

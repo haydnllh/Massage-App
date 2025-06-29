@@ -7,6 +7,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
 import { createBooking } from "../../features/booking/bookingSlice";
+import { ItemPrices } from "../../config/itemIds";
 
 const disabledDates = ["2025-06-19"];
 
@@ -15,7 +16,10 @@ const disabledDatesJs = disabledDates.map((date) => dayjs(date));
 const Availability = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isSuccess, item_id } = useSelector((state) => state.booking);
+  const { isSuccess, item_id: storedItemId } = useSelector(
+    (state) => state.booking
+  );
+  const item_id = storedItemId || localStorage.getItem("item_id");
   const { user } = useSelector((state) => state.auth);
 
   const [selectedDate, setSelectedDate] = useState(null);
@@ -52,6 +56,8 @@ const Availability = () => {
       booking,
     };
 
+    localStorage.removeItem("item_id");
+
     dispatch(createBooking(dataToSubmit));
   };
 
@@ -63,6 +69,7 @@ const Availability = () => {
           onChange={(newDate) => setSelectedDate(newDate)}
           shouldDisableDate={isDateDisabled}
         />
+
         <TimePicker
           label="Choose a time"
           onChange={(newTime) => setSelectedTime(newTime)}
@@ -71,6 +78,12 @@ const Availability = () => {
           ampm={false}
         />
       </LocalizationProvider>
+
+      <select>
+        {ItemPrices[item_id].map(({ duration, index }) => (
+          <option key={index}>{duration}</option>
+        ))}
+      </select>
       <button className="submit" onClick={handleSubmit}>
         Submit
       </button>

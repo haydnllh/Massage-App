@@ -82,6 +82,7 @@
     font-weight: bold;
 
     &:hover {
+      background-color: rgb(235, 200, 134);
     }
 
     @media (max-width: 768px) {
@@ -94,8 +95,10 @@
       margin: 0 auto;
       font-size: 1rem;
       font-weight: normal;
+      font-size: 1.15rem;
       &:hover {
-        color: black;
+        background-color: beige;
+        font-family: "IBM Plex Sans JP";
       }
     }
   }
