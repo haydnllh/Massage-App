@@ -6,6 +6,7 @@ import { setItemId } from "../../features/booking/bookingSlice";
 import "./booking.scss";
 import Popup from "../../components/Popup/Popup";
 import { GoPlus } from "react-icons/go";
+import { MdKeyboardArrowRight } from "react-icons/md";
 
 const Booking = () => {
   const navigate = useNavigate();
@@ -50,6 +51,7 @@ const Booking = () => {
       </div>
 
       <div className="booking-choices">
+        <hr/>
         <div className="choice">
           <div className="choice-description">
             <h3 className="title">Swedish Massage</h3>
@@ -59,6 +61,7 @@ const Booking = () => {
             Book Now
           </button>
         </div>
+        <hr/>
         <div className="choice">
           <div className="choice-description">
             <h3 className="title">Relaxing Massage</h3>
@@ -68,6 +71,7 @@ const Booking = () => {
             Book Now
           </button>
         </div>
+        <hr/>
         <div className="choice">
           <div className="choice-description">
             <h3 className="title">Reflexology Foot Massage</h3>
@@ -77,6 +81,7 @@ const Booking = () => {
             Book Now
           </button>
         </div>
+        <hr/>
         <div className="choice">
           <div className="choice-description">
             <h3 className="title">Head Massage</h3>
@@ -86,6 +91,7 @@ const Booking = () => {
             Book Now
           </button>
         </div>
+        <hr/>
         <div className="choice">
           <div className="choice-description">
             <h3 className="title">Back Neck Shoulders Head</h3>
@@ -95,6 +101,7 @@ const Booking = () => {
             Book Now
           </button>
         </div>
+        <hr/>
         <div className="choice">
           <div className="choice-description">
             <h3 className="title">Aromatherapy</h3>
@@ -104,6 +111,7 @@ const Booking = () => {
             Book Now
           </button>
         </div>
+        <hr/>
         <div className="choice">
           <div className="choice-description">
             <h3 className="title">Chinese Traditional Tuina</h3>
@@ -113,6 +121,7 @@ const Booking = () => {
             Book Now
           </button>
         </div>
+        <hr/>
         <div className="choice">
           <div className="choice-description">
             <h3 className="title">Sports Massage</h3>
@@ -122,6 +131,7 @@ const Booking = () => {
             Book Now
           </button>
         </div>
+        <hr/>
         <div className="choice">
           <div className="choice-description">
             <h3 className="title">Deep Tissue Massage</h3>
@@ -131,6 +141,7 @@ const Booking = () => {
             Book Now
           </button>
         </div>
+        <hr/>
         <div className="choice">
           <div className="choice-description">
             <h3 className="title">Thai Oil Massage</h3>
@@ -140,6 +151,7 @@ const Booking = () => {
             Book Now
           </button>
         </div>
+        <hr/>
       </div>
 
       {popupPage === 1 ? (
@@ -174,7 +186,7 @@ const Booking = () => {
           </select>
 
           <div className="popup-bottom">
-            <hr className="next-button-line"/>
+            <hr className="next-button-line" />
             <button
               className="next-button"
               disabled={!selectedTimePrice.length}
@@ -224,8 +236,11 @@ const Booking = () => {
             <hr />
             <p>Total price: £{items.reduce((sum, i) => sum + i.price, 0)}</p>
           </div>
-          <div className="popup-bottom">
-            <hr className="next-button-line"/>
+          <div
+            className="popup-bottom"
+            onClick={() => navigate("/bookings/availability", { state: items })}
+          >
+            <hr className="next-button-line" />
             <button className="next-button">Next</button>
           </div>
         </Popup>
@@ -235,15 +250,36 @@ const Booking = () => {
           setTrigger={setButtonPopup}
           onClose={reset}
         >
-          <div className="choice">
-            <div className="choice-description">
-              <h3 className="title">Back Neck Shoulders Head</h3>
-              <p className="description">Description</p>
-            </div>
-            <button className="book-button" onClick={() => handlePopupClick(5)}>
-              Book Now
-            </button>
+          <h1>Treatments</h1>
+          <hr className="title-line" />
+          <div className="popup-choice-list">
+            {Object.entries(ItemPrices).map(([item_id, value], index) => (
+              <div key={index}>
+                <div
+                  className="popup-choice"
+                  key={item_id}
+                  onClick={() => handlePopupClick(item_id)}
+                >
+                  <div className="popup-choice-description">
+                    <p>{`${ItemNames[item_id]} • ${value[0].duration} - ${
+                      value.at(-1).duration
+                    } min`}</p>
+                    <p>{`From £${value[0].price}`}</p>
+                  </div>
+                  <button
+                    className="pop-up-arrow-button"
+                    onClick={() => handlePopupClick(item_id)}
+                  >
+                    <MdKeyboardArrowRight />
+                  </button>
+                </div>
+                <hr />
+              </div>
+            ))}
           </div>
+          <button className="back-button" onClick={() => setPopupPage(2)}>
+            Back
+          </button>
         </Popup>
       )}
     </div>

@@ -1,12 +1,11 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
-import { createBooking } from "../../features/booking/bookingSlice";
 import { ItemPrices } from "../../config/itemIds";
 
 const disabledDates = ["2025-06-19"];
@@ -16,10 +15,7 @@ const disabledDatesJs = disabledDates.map((date) => dayjs(date));
 const Availability = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isSuccess, item_id: storedItemId } = useSelector(
-    (state) => state.booking
-  );
-  const item_id = storedItemId || localStorage.getItem("item_id");
+  const items = useLocation().state;
   const { user } = useSelector((state) => state.auth);
 
   const [selectedDate, setSelectedDate] = useState(null);
@@ -28,10 +24,6 @@ const Availability = () => {
   const isDateDisabled = (date) => {
     return disabledDatesJs.some((day) => day.isSame(date));
   };
-
-  useEffect(() => {
-    if (isSuccess) navigate("/bookings/confirmation");
-  }, [isSuccess]);
 
   const handleSubmit = () => {
     if (!selectedDate || !selectedTime) {
@@ -44,21 +36,19 @@ const Availability = () => {
       .minute(selectedTime.minute());
 
     const user_id = user.user_id;
-    const booking = {
-      item_id: item_id,
+    const bookings = items.map((i) => ({
+      item_id: i.item_id,
       booking_date: combined.format("YYYY-MM-DD"),
       start_time: combined.format("HH:mm"),
-      end_time: combined.add(2, "hour").format("hh:mm"),
-    };
+      end_time: combined.add(i.duration, "minute").format("hh:mm"),
+    }));
 
     const dataToSubmit = {
       user_id,
-      booking,
+      bookings,
     };
 
-    localStorage.removeItem("item_id");
-
-    dispatch(createBooking(dataToSubmit));
+    console.log(dataToSubmit)
   };
 
   return (
@@ -79,11 +69,6 @@ const Availability = () => {
         />
       </LocalizationProvider>
 
-      <select>
-        {ItemPrices[item_id].map(({ duration, index }) => (
-          <option key={index}>{duration}</option>
-        ))}
-      </select>
       <button className="submit" onClick={handleSubmit}>
         Submit
       </button>

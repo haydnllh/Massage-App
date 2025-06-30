@@ -24,14 +24,15 @@
   }
 
   .booking-choices {
-    margin: 1rem;
     display: flex;
     flex-direction: column;
+    background-color: bisque;
     gap: 1rem;
+    margin: 1rem 5vw;
+    padding:0 0.5rem;
+
     .choice {
       width: 100%;
-      border: 2px solid rgb(188, 186, 186);
-      border-radius: 8px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -51,7 +52,7 @@
       border-radius: 5px;
 
       &:hover {
-        text-decoration: underline;
+        background-color: rgb(237, 197, 145);
       }
     }
   }
@@ -65,10 +66,13 @@
     min-height: 400px;
     height: 75vh;
     padding-bottom: 60px;
+    
 
     @media (max-width: 768px) {
-      width: 60vw;
+      width: 100vw;
       padding-bottom: 120px;
+      min-height: 200px;
+      height: 50vh;
     }
 
     .title-line {
@@ -97,7 +101,7 @@
       left: 5%;
       right: 5%;
 
-      .next-button-line{
+      .next-button-line {
         margin-bottom: 5px;
       }
       .next-button {
@@ -152,6 +156,44 @@
       gap: 4px;
       margin-bottom: 5px;
       max-height: 75%;
+    }
+
+    .popup-choice {
+      display: flex;
+      justify-content: space-between;
+      margin: 0.5rem 0;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    .popup-choice-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      overflow: auto;
+      min-height: 100px;
+    }
+
+    .pop-up-arrow-button {
+      border: transparent;
+      background-color: transparent;
+      font-size: 1.2rem;
+    }
+
+    .back-button{
+      position: absolute;
+      top: 90%;
+      border: transparent;
+      background-color: black;
+      font-family: "font-sans";
+      color: white;
+      border-radius: 4px;
+      width: 60px;
+      height: 30px;
+      &:hover{
+        background-color: rgb(40, 40, 40);
+      }
     }
   }
 }

@@ -24,7 +24,7 @@ export default function Popup(props) {
             if(props.onClose) props.onClose();
           }}
         >
-          <FaTimes />
+          <FaTimes id="popup-cross"/>
         </button>
         {props.children}
       </div>

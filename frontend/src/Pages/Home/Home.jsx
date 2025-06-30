@@ -1,9 +1,18 @@
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 import "./home.scss";
 import Footer from "../../components/Footer/Footer"
 
 const Home = () => {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    document.body.style.backgroundColor = "bisque"
+
+    return () => {
+      document.body.style.backgroundColor = "#f9f2ea"
+    }
+  }, [])
 
   return (
     <div className="home">
