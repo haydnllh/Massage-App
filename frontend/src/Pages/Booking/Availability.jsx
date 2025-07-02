@@ -1,16 +1,14 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useLocation } from "react-router-dom";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
-import { ItemPrices } from "../../config/itemIds";
-
-const disabledDates = ["2025-06-19"];
-
-const disabledDatesJs = disabledDates.map((date) => dayjs(date));
+import { ItemPrices, ItemNames } from "../../config/itemIds";
+import "./availability.scss";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { generateTimeFromRange, generateClosingTimes } from "../../config/time";
 
 const Availability = () => {
   const dispatch = useDispatch();
@@ -20,6 +18,10 @@ const Availability = () => {
 
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
+
+  useEffect(() => {
+    setSelectedDate(new Date());
+  }, []);
 
   const isDateDisabled = (date) => {
     return disabledDatesJs.some((day) => day.isSame(date));
@@ -48,30 +50,71 @@ const Availability = () => {
       bookings,
     };
 
-    console.log(dataToSubmit)
+    console.log(dataToSubmit);
+  };
+
+  const dateFilter = (date) => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    return date.getDay !== 2 && date >= today;
+  };
+
+  const getDisabledTimes = () => {
+    if (!selectedDate) return [];
+
+    var disabledTimes = [];
+
+    const closedTimes = generateTimeFromRange(selectedDate, 0, 0, 8, 0);
+    disabledTimes = disabledTimes.concat(generateClosingTimes(selectedDate));
+
+    return disabledTimes;
   };
 
   return (
-    <div className="container">
-      <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <DatePicker
-          label="Choose a date"
-          onChange={(newDate) => setSelectedDate(newDate)}
-          shouldDisableDate={isDateDisabled}
-        />
+    <div className="container availability-container">
+      <div className="availability-left">
+        <p className="title">Select your date and time</p>
+        <hr />
 
-        <TimePicker
-          label="Choose a time"
-          onChange={(newTime) => setSelectedTime(newTime)}
-          disabled={!selectedDate}
-          timezone="default"
-          ampm={false}
-        />
-      </LocalizationProvider>
+        <div id="datepicking">
+          <div className="datepicker">
+            <DatePicker
+              selected={selectedDate}
+              onChange={(date) => setSelectedDate(date)}
+              inline
+              id="datepicker"
+              filterDate={dateFilter}
+            />
+          </div>
 
-      <button className="submit" onClick={handleSubmit}>
-        Submit
-      </button>
+          <div className="timepicker">
+            <DatePicker
+              selected={selectedTime}
+              onChange={(time) => setSelectedTime(time)}
+              showTimeSelect
+              showTimeSelectOnly
+              timeIntervals={15}
+              dateFormat="h:mm aa"
+              inline
+              timeCaption="Available times"
+              excludeTimes={getDisabledTimes()}
+            />
+          </div>
+        </div>
+      </div>
+
+      <div id="summary">
+        <h2>Your Appointment</h2>
+        <hr id="summary-line" />
+        {items.map((i, index) => (
+          <div className="summary-item" key={index}>
+            <p>{ItemNames[i.item_id]}</p>
+            <p>{`${i.duration} min`}</p>
+            <hr className="summary-item-line" />
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

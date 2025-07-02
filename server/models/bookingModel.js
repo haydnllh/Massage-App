@@ -18,26 +18,48 @@ const Booking = {
     );
   },
 
-  async add({ user_id, item_id, booking_date, start_time, end_time }) {
-    const time = new Date();
+  async add(bookings) {
+    const time = new Date().toISOString();
+    const { user_id, ...bookingsList } = bookings;
 
-    const result = await pool.query(
-      "INSERT INTO bookings (user_id, item_id, booking_date, start_time, end_time, status, created_at, updated_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *",
-      [
+    const values = [];
+    const placeholders = [];
+
+    let i = 1;
+    for (const booking of Object.values(bookingsList)) {
+      const { item_id, booking_date, start_time, end_time } = booking;
+
+      values.push(
         user_id,
         item_id,
         booking_date,
         start_time,
         end_time,
-        BookingStatus.CONFIRMED,
+        "confirmed", // or BookingStatus.CONFIRMED if it's a string
         time,
-        time,
-      ]
-    );
+        time
+      );
 
-    const booking = result.rows[0];
+      placeholders.push(
+        `($${i}, $${i + 1}, $${i + 2}, $${i + 3}, $${i + 4}, $${i + 5}, $${
+          i + 6
+        }, $${i + 7})`
+      );
 
-    return booking ? booking : null;
+      i += 8;
+    }
+
+    const query = `
+    INSERT INTO bookings (
+      user_id, item_id, booking_date, start_time, end_time, status, created_at, updated_at
+    )
+    VALUES ${placeholders.join(", ")}
+    RETURNING *;
+  `;
+
+    const result = await pool.query(query, values);
+
+    return result.rows.length > 0 ? result.rows : null;
   },
 
   async removeBookings(userId, bookingIds) {

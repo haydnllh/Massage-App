@@ -34,9 +34,9 @@ const getBookingList = async (req, res, next) => {
 const addBooking = async (req, res, next) => {
   try {
     const { user_id } = req.params;
-    const booking = { user_id, ...req.body };
+    const bookings = { user_id, ...req.body };
 
-    const result = await Booking.add(booking);
+    const result = await Booking.add(bookings);
 
     result
       ? res.status(201).json(result)
