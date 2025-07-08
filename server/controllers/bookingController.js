@@ -1,5 +1,7 @@
 const Booking = require("../models/bookingModel");
-const dayjs = require("dayjs")
+const User = require("../models/userModel");
+const dayjs = require("dayjs");
+const sendConfirmation = require("../config/email");
 
 //Get bookings by user id
 const getUserBookings = async (req, res, next) => {
@@ -27,7 +29,7 @@ const getAllBookingByDate = async (req, res, next) => {
     const { date } = req.query;
 
     const result = await Booking.getBookingByDate(date);
-  
+
     res.json(result.rows);
   } catch (err) {
     next(err);
@@ -50,10 +52,18 @@ const addBooking = async (req, res, next) => {
     const bookings = { user_id, ...req.body };
 
     const result = await Booking.add(bookings);
+    console.log(bookings)
 
-    result
-      ? res.status(201).json(result)
-      : res.status(400).json({ message: "Problem when booking" });
+    if (result) {
+      res.status(201).json(result);
+
+      const user_result = await User.getFromId(user_id);
+      const user = user_result.rows[0];
+      const email_result = await sendConfirmation(user, bookings);
+      console.log(email_result);
+    } else {
+      result.status(400).json({ message: "Porblem when booking" });
+    }
   } catch (err) {
     next(err);
   }
