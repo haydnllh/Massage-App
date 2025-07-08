@@ -18,15 +18,22 @@ const Booking = {
     );
   },
 
+  async getBookingByDate(date) {
+    return await pool.query(
+      `SELECT booking_id, user_id, item_id, booking_date::text, start_time, end_time FROM bookings WHERE booking_date = $1`,
+      [date]
+    );
+  },
+
   async add(bookings) {
     const time = new Date().toISOString();
-    const { user_id, ...bookingsList } = bookings;
+    const { user_id, bookingsList } = bookings;
 
     const values = [];
     const placeholders = [];
 
     let i = 1;
-    for (const booking of Object.values(bookingsList)) {
+    for (const booking of bookingsList) {
       const { item_id, booking_date, start_time, end_time } = booking;
 
       values.push(
@@ -54,7 +61,7 @@ const Booking = {
       user_id, item_id, booking_date, start_time, end_time, status, created_at, updated_at
     )
     VALUES ${placeholders.join(", ")}
-    RETURNING *;
+    RETURNING booking_id, user_id, item_id, booking_date::text, start_time, end_time;
   `;
 
     const result = await pool.query(query, values);

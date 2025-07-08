@@ -258,7 +258,7 @@ const Booking = () => {
                 <div
                   className="popup-choice"
                   key={item_id}
-                  onClick={() => handlePopupClick(item_id)}
+                  onClick={() => handlePopupClick(parseInt(item_id))}
                 >
                   <div className="popup-choice-description">
                     <p>{`${ItemNames[item_id]} • ${value[0].duration} - ${
@@ -268,7 +268,7 @@ const Booking = () => {
                   </div>
                   <button
                     className="pop-up-arrow-button"
-                    onClick={() => handlePopupClick(item_id)}
+                    onClick={() => handlePopupClick(parseInt(item_id))}
                   >
                     <MdKeyboardArrowRight />
                   </button>

@@ -1,12 +1,46 @@
+import dayjs from "dayjs";
+
 export async function fetchAllBookings() {
   const result = await fetch("/api/bookings/bookinglist", {
     method: "GET",
   });
 
-  if(!result.ok){
-    throw new Error(result.json())
+  if (!result.ok) {
+    throw new Error(result.json());
   }
 
-  const data = await result.json()
-  return data
+  const data = await result.json();
+  return data;
+}
+
+export async function getBookingOnDate(selectedDate) {
+  const parsed = dayjs(selectedDate);
+
+  if (!parsed.isValid()) throw new Error("Invalid date");
+
+  const date = parsed.format("YYYY-MM-DD");
+
+  const res = await fetch(`/api/bookings/bookinglist/date?date=${date}`);
+
+  if (!res.ok) {
+    throw new Error("Failed to get booking times");
+  }
+
+  return res.json();
+}
+
+export async function postBooking(bookings, user_id) {
+  const res = await fetch(`/api/bookings/${user_id}`, {
+    method: "POST",
+    body: JSON.stringify(bookings),
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+    },
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed to post booking");
+  }
+
+  return res.json();
 }

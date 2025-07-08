@@ -1,4 +1,9 @@
 import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 export function generateTimeFromRange(
   date,
@@ -10,10 +15,10 @@ export function generateTimeFromRange(
   const disabledTimes = [];
 
   var time = new Date(date);
-  time.setHours(startHour, startMin, 0);
+  time.setHours(parseInt(startHour), parseInt(startMin), 0);
 
   const endTime = new Date(date);
-  endTime.setHours(endHour, endMin, 0);
+  endTime.setHours(parseInt(endHour), parseInt(endMin), 0);
 
   while (time < endTime) {
     disabledTimes.push(time);
@@ -45,4 +50,13 @@ export function generateClosingTimes(date) {
   }
 
   return disabled;
+}
+
+export function getUKMidnightToday() {
+  const ukTodayMidnight = dayjs().tz("Europe/London").startOf("day");
+  return ukTodayMidnight.toDate();
+}
+
+export function addMinutes(date, minutes) {
+    return new Date(date.getTime() + minutes*60000);
 }
