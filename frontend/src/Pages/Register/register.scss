@@ -1,12 +1,9 @@
 .form-wrapper {
   width: 540px;
   max-width: 100%;
-  margin: 0 auto;
-
   .input-group {
     margin-bottom: 1rem;
   }
-
   label {
     display: block;
     margin-bottom: 0.5rem;
@@ -20,6 +17,7 @@
     font-size: 1rem;
     border: 1px solid black;
     border-radius: 2px;
+
 
     &.error-form {
       border-color: red;
@@ -38,7 +36,7 @@
     margin-bottom: 1rem;
   }
 
-  #register {
+  #login {
     max-width: max-content;
     margin: 0 auto;
     a:hover {

@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { ItemIds, ItemNames, ItemPrices } from "../../config/itemIds";
 import { setItemId } from "../../features/booking/bookingSlice";
@@ -10,7 +10,7 @@ import { MdKeyboardArrowRight } from "react-icons/md";
 
 const Booking = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const location = useLocation();
   const { user } = useSelector((state) => state.auth);
   const [buttonPopup, setButtonPopup] = useState(false);
   const [selectedItem, setSelectedBooking] = useState(1);
@@ -43,6 +43,19 @@ const Booking = () => {
     setSelectedTimePrice(e.target.value);
   };
 
+  const handleNextPage = () => {
+    if (user) {
+      navigate("/bookings/availability", { state: items });
+    } else {
+      navigate("/register", {
+        state: {
+          from: location.pathname,
+          bookings: items,
+        },
+      });
+    }
+  };
+
   return (
     <div className="booking">
       <div className="main-image-container">
@@ -51,7 +64,7 @@ const Booking = () => {
       </div>
 
       <div className="booking-choices">
-        <hr/>
+        <hr />
         <div className="choice">
           <div className="choice-description">
             <h3 className="title">Swedish Massage</h3>
@@ -61,7 +74,7 @@ const Booking = () => {
             Book Now
           </button>
         </div>
-        <hr/>
+        <hr />
         <div className="choice">
           <div className="choice-description">
             <h3 className="title">Relaxing Massage</h3>
@@ -71,7 +84,7 @@ const Booking = () => {
             Book Now
           </button>
         </div>
-        <hr/>
+        <hr />
         <div className="choice">
           <div className="choice-description">
             <h3 className="title">Reflexology Foot Massage</h3>
@@ -81,7 +94,7 @@ const Booking = () => {
             Book Now
           </button>
         </div>
-        <hr/>
+        <hr />
         <div className="choice">
           <div className="choice-description">
             <h3 className="title">Head Massage</h3>
@@ -91,7 +104,7 @@ const Booking = () => {
             Book Now
           </button>
         </div>
-        <hr/>
+        <hr />
         <div className="choice">
           <div className="choice-description">
             <h3 className="title">Back Neck Shoulders Head</h3>
@@ -101,7 +114,7 @@ const Booking = () => {
             Book Now
           </button>
         </div>
-        <hr/>
+        <hr />
         <div className="choice">
           <div className="choice-description">
             <h3 className="title">Aromatherapy</h3>
@@ -111,7 +124,7 @@ const Booking = () => {
             Book Now
           </button>
         </div>
-        <hr/>
+        <hr />
         <div className="choice">
           <div className="choice-description">
             <h3 className="title">Chinese Traditional Tuina</h3>
@@ -121,7 +134,7 @@ const Booking = () => {
             Book Now
           </button>
         </div>
-        <hr/>
+        <hr />
         <div className="choice">
           <div className="choice-description">
             <h3 className="title">Sports Massage</h3>
@@ -131,7 +144,7 @@ const Booking = () => {
             Book Now
           </button>
         </div>
-        <hr/>
+        <hr />
         <div className="choice">
           <div className="choice-description">
             <h3 className="title">Deep Tissue Massage</h3>
@@ -141,7 +154,7 @@ const Booking = () => {
             Book Now
           </button>
         </div>
-        <hr/>
+        <hr />
         <div className="choice">
           <div className="choice-description">
             <h3 className="title">Thai Oil Massage</h3>
@@ -151,7 +164,7 @@ const Booking = () => {
             Book Now
           </button>
         </div>
-        <hr/>
+        <hr />
       </div>
 
       {popupPage === 1 ? (
@@ -238,7 +251,7 @@ const Booking = () => {
           </div>
           <div
             className="popup-bottom"
-            onClick={() => navigate("/bookings/availability", { state: items })}
+            onClick={handleNextPage}
           >
             <hr className="next-button-line" />
             <button className="next-button">Next</button>

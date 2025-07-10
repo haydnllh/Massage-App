@@ -4,6 +4,15 @@
   justify-content: space-between;
   flex-wrap: wrap;
 
+  .next-button {
+    height: 2rem;
+    width: 100%;
+    border: transparent;
+    background-color: black;
+    border-radius: 5px;
+    color: white
+  }
+
   @media (max-width: 768px) {
     justify-content: center;
   }
@@ -69,12 +78,12 @@
     }
 
     .react-datepicker__day--outside-month {
-      color:darkgray !important;
+      color: darkgray !important;
       pointer-events: none;
     }
 
-    .react-datepicker__day--disabled{
-      color:darkgray !important;
+    .react-datepicker__day--disabled {
+      color: darkgray !important;
       pointer-events: none;
     }
 
@@ -93,7 +102,6 @@
     .react-datepicker__day--keyboard-selected {
       background-color: rgb(245, 236, 199);
       border-radius: 0% !important;
-      
     }
 
     .react-datepicker__day--selected,
@@ -156,7 +164,7 @@
       }
     }
 
-    .react-datepicker__time-list-item--disabled{
+    .react-datepicker__time-list-item--disabled {
       display: none;
     }
   }

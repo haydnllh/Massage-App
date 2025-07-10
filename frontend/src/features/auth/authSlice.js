@@ -10,11 +10,12 @@ const initialState = {
   message: "",
 };
 
-export const registerUser = createAsyncThunk(
+export const registerAndLoginUser = createAsyncThunk(
   "auth/register",
   async (userData, thunkApi) => {
     try {
-      const res = await fetch("/api/users", {
+      //Register
+      const registerRes = await fetch("/api/users", {
         headers: {
           "Content-Type": "application/json",
         },
@@ -22,12 +23,30 @@ export const registerUser = createAsyncThunk(
         body: JSON.stringify({ ...userData, isAdmin: false }),
       });
 
-      if (!res.ok) {
-        const error = await res.json();
+      if (!registerRes.ok) {
+        const error = await registerRes.json();
         return thunkApi.rejectWithValue(error);
       }
 
-      const data = await res.json();
+      //Login
+      const loginRes = await fetch("/api/users/login", {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: "POST",
+        body: JSON.stringify({
+          email: userData.email,
+          password: userData.password,
+        }),
+      });
+
+      if (!loginRes.ok) {
+        const error = await loginRes.json();
+        return thunkApi.rejectWithValue(error);
+      }
+
+      const data = await loginRes.json();
+      localStorage.setItem("user", JSON.stringify(data));
       return data;
     } catch (err) {
       return thunkApi.rejectWithValue(err.message);
@@ -95,14 +114,15 @@ export const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(registerUser.pending, (state) => {
+      .addCase(registerAndLoginUser.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(registerUser.fulfilled, (state, action) => {
+      .addCase(registerAndLoginUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
+        state.user = action.payload;
       })
-      .addCase(registerUser.rejected, (state, action) => {
+      .addCase(registerAndLoginUser.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;

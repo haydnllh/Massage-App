@@ -30,8 +30,8 @@ const Availability = () => {
   const [selectedTime, setSelectedTime] = useState(null);
 
   useEffect(() => {
-    if(today.getDay() === 2){
-      today = new Date(today.getTime() + 86400000)
+    if (today.getDay() === 2) {
+      today = new Date(today.getTime() + 86400000);
     }
     setSelectedDate(today);
   }, []);
@@ -52,7 +52,8 @@ const Availability = () => {
   } = useMutation({
     mutationFn: (bookings) => postBooking(bookings, user.user_id),
     onSuccess: (data) => {
-      navigate("/bookings/confirmation", { state: data })},
+      navigate("/bookings/confirmation", { state: data });
+    },
   });
 
   const handleSubmit = () => {
@@ -78,7 +79,6 @@ const Availability = () => {
       time = end_time;
     }
 
-
     const dataToSubmit = {
       bookingsList: itemsToSubmit,
     };
@@ -95,6 +95,10 @@ const Availability = () => {
 
     var disabledTimes = [];
 
+    const totalDuration = items.reduce((acc, i) => {
+      return (acc += i.duration);
+    }, 0);
+
     data.forEach((booking) => {
       disabledTimes = disabledTimes.concat(
         generateTimeFromRange(
@@ -102,11 +106,15 @@ const Availability = () => {
           booking.start_time.split(":")[0],
           booking.start_time.split(":")[1],
           booking.end_time.split(":")[0],
-          booking.end_time.split(":")[1]
+          booking.end_time.split(":")[1],
+          totalDuration
         )
       );
     });
-    disabledTimes = disabledTimes.concat(generateClosingTimes(selectedDate));
+
+    disabledTimes = disabledTimes.concat(
+      generateClosingTimes(selectedDate, totalDuration)
+    );
 
     return disabledTimes;
   };
@@ -145,7 +153,7 @@ const Availability = () => {
                       showTimeSelect
                       showTimeSelectOnly
                       timeIntervals={15}
-                      dateFormat="h:mm aa"
+                      dateFormat="hh:mm aa"
                       inline
                       timeCaption="Available times"
                       excludeTimes={getDisabledTimes()}
@@ -173,7 +181,9 @@ const Availability = () => {
             </div>
           ))}
         </div>
-        <button onClick={handleSubmit}>Next</button>
+        <button className="next-button" onClick={handleSubmit}>
+          Next
+        </button>
       </div>
     </div>
   );
