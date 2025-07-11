@@ -72,7 +72,7 @@ const Login = () => {
       <h1 className="heading center">Login</h1>
 
       <div className="form-wrapper">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} noValidate>
           <div className="input-group">
             <label htmlFor="email">Email</label>
             <input

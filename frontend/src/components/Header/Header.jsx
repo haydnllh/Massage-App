@@ -34,7 +34,7 @@ const Header = () => {
     <header className="main-header">
       <Link to="/">
         <h1 className="logo">
-          Willow wellness & sport therapy <br /> 柳树健康与运动疗法
+          Willow wellness & sport therapy
         </h1>
       </Link>
 
