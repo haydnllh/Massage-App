@@ -1,9 +1,136 @@
+import { useState, useEffect } from "react";
+import "./profile.scss";
+import { useSelector, useDispatch } from "react-redux";
+import { updateUser } from "../../features/auth/authSlice";
+import validator from "validator";
+
 const Profile = () => {
+  const { user, isError, isLoading } = useSelector((state) => state.auth);
+  const [change, setChange] = useState(0);
+  const [firstName, setFirstName] = useState(user.first_name);
+  const [lastName, setLastName] = useState(user.last_name);
+  const [email, setEmail] = useState(user.email);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!isLoading) {
+      setFirstName(user.first_name);
+      setLastName(user.last_name);
+      setEmail(user.email);
+    }
+  }, [change, isLoading]);
+
+  const ChangeButtons = (props) => {
+    const { formNumber } = props;
+
+    const handleCancel = () => {
+      setChange(0);
+      switch (formNumber) {
+        case 1:
+          setFirstName(user.first_name);
+          break;
+        case 2:
+          setLastName(user.last_name);
+          break;
+        case 3:
+          setEmail(user.email);
+          break;
+      }
+    };
+
+    const handleConfirm = () => {
+      switch (formNumber) {
+        case 1:
+          dispatch(updateUser({ first_name: firstName }));
+          break;
+        case 2:
+          dispatch(updateUser({ last_name: lastName }));
+          break;
+        case 3:
+          dispatch(updateUser({ email: email }));
+          break;
+      }
+      setChange(0);
+    };
+
     return (
-        <div className="account-profile-container">
-            aedasnj
+      <div
+        className={`change-buttons ${
+          change === formNumber ? "show" : "hidden"
+        }`}
+      >
+        <button className="confirm change" onClick={handleConfirm}>
+          Confirm
+        </button>
+        <button className="cancel change" onClick={handleCancel}>
+          Cancel
+        </button>
+      </div>
+    );
+  };
+
+  return (
+    <div className="account-profile-container">
+      <div className="title">
+        <h1>Profile</h1>
+        <p>
+          <small>Information of your account</small>
+        </p>
+      </div>
+
+      <div className="account-info">
+        <label>First Name</label>
+        <div className="form">
+          <input
+            value={firstName}
+            disabled={change !== 1}
+            onChange={(e) => setFirstName(e.target.value)}
+          />
+          <button
+            className={`change ${change !== 1 ? "show" : "hidden"}`}
+            onClick={() => setChange(1)}
+          >
+            Change
+          </button>
+          <ChangeButtons formNumber={1} />
         </div>
-    )
-}
+      </div>
+      <div className="account-info">
+        <label>Last Name</label>
+        <div className="form">
+          <input
+            value={lastName}
+            disabled={change !== 2}
+            onChange={(e) => setLastName(e.target.value)}
+          />
+          <button
+            className={`change ${change !== 2 ? "show" : "hidden"}`}
+            onClick={() => setChange(2)}
+          >
+            Change
+          </button>
+          <ChangeButtons formNumber={2} />
+        </div>
+      </div>
+      <div className="account-info">
+        <label>Email</label>
+        <div className="form">
+          <input
+            value={email}
+            disabled={change !== 3}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <button
+            className={`change ${change !== 3 ? "show" : "hidden"}`}
+            onClick={() => setChange(3)}
+          >
+            Change
+          </button>
+          <ChangeButtons formNumber={3} />
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default Profile;

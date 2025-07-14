@@ -1,17 +1,21 @@
+import "./account.scss";
 import { Outlet, NavLink } from "react-router-dom";
 
 const Account = () => {
   return (
     <div className="account-container">
-      <aside className="sidebar">
-        <ul>
-          <li>
+      <aside>
+        <div className="sidebar">
+          <h2>Account</h2>
+          <div>
             <NavLink to="profile">Profile</NavLink>
-          </li>
-          <li>
+            <hr />
+          </div>
+          <div>
             <NavLink to="bookings">Bookings</NavLink>
-          </li>
-        </ul>
+            <hr />
+          </div>
+        </div>
       </aside>
 
       <main className="account-content">

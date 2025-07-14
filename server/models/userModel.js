@@ -27,9 +27,14 @@ const User = {
     const values = [];
     let index = 1;
 
-    if (first_name && last_name) {
-      updates.push(`first_name = $${index++}, last_name = $${index++}`);
-      values.push(first_name, last_name);
+    if (first_name) {
+      updates.push(`first_name = $${index++}`);
+      values.push(first_name);
+    }
+
+    if (last_name) {
+      updates.push(`last_name = $${index++}`);
+      values.push(last_name);
     }
 
     if (email) {
@@ -54,6 +59,7 @@ const User = {
     UPDATE users
     SET ${updates.join(", ")}
     WHERE user_id = ${user_id}
+    RETURNING *
   `;
 
     const result = await pool.query(query, values);

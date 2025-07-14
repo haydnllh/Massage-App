@@ -37,7 +37,9 @@ const updateUser = async (req, res, next) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    res.status(201).json({ message: "User updated" });
+    const { password_hash, ...rest } = result.rows[0];
+
+    res.status(201).json(rest);
   } catch (err) {
     next(err);
   }

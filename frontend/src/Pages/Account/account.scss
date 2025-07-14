@@ -1,0 +1,19 @@
+.account-container {
+  display: flex;
+  justify-content: space-evenly;
+
+  .sidebar {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 200px;
+    height: 80vh;
+    gap: 10vh;
+    margin-top: 10vh;
+  }
+
+  .account-content{
+    width: 500px;
+  }
+}
