@@ -5,6 +5,7 @@ import { useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { logoutUser, reset } from "../../features/auth/authSlice";
+import AccountIcon from "./AccountIcon";
 
 const Header = () => {
   const { user } = useSelector((state) => state.auth);
@@ -65,7 +66,7 @@ const Header = () => {
               >
                 Book Online
               </button>
-              <LogoutButton />
+              <AccountIcon />
             </>
           )
         ) : (

@@ -8,6 +8,10 @@ import Header from "./components/Header/Header";
 import Booking from "./Pages/Booking/Booking";
 import Availability from "./Pages/Booking/Availability";
 import Confirmation from "./Pages/Booking/Confirmation";
+import Profile from "./Pages/Account/Profile";
+import Bookings from "./Pages/Account/Bookings";
+import Account from "./Pages/Account/Account";
+
 import {
   UserProtectedRoutes,
   AdminProtectedRoutes,
@@ -26,6 +30,10 @@ const App = () => {
           <Route element={<UserProtectedRoutes />}>
             <Route path="/bookings/availability" element={<Availability />} />
             <Route path="/bookings/confirmation" element={<Confirmation />} />
+            <Route path="/account" element={<Account />}>
+              <Route path="profile" element={<Profile />} />
+              <Route path="bookings" element={<Bookings />} />
+            </Route>
           </Route>
           <Route element={<AdminProtectedRoutes />}>
             <Route path="/dashboard" element={<Dashboard />}></Route>

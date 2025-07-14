@@ -1,0 +1,63 @@
+
+
+.account-icon-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  .dropdown {
+    &.show {
+      position: absolute;
+      top: 150%;
+      right: 10%;
+      width: 200px;
+    }
+
+    .dropdown-list{
+        background-color: white;
+        list-style: none;
+        box-shadow: 0 0 2px 1px grey;
+        font-family: "Sans-serif";
+        font-size: 1.1rem;
+        padding: 1px 10px;
+        border-radius: 5px;
+
+        li{
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+
+            &:hover{
+                color: darkgoldenrod;
+                text-decoration: underline;
+            }
+        }
+    }
+  }
+
+  .icons {
+    display: flex;
+  }
+
+  .spin {
+    animation: spin 0.3s linear;
+  }
+  @keyframes spin {
+    from {
+      transform: rotateX(180deg);
+    }
+    to {
+      transform: rotateX(0deg);
+    }
+  }
+}
