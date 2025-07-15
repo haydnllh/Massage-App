@@ -13,7 +13,22 @@
     margin-top: 10vh;
   }
 
-  .account-content{
+  .account-content {
     width: 500px;
+  }
+
+  .active {
+    color: burlywood;
+  }
+
+  .nav {
+    font-family: sans-serif;
+
+    &:hover {
+      color: gray;
+      &.active {
+        color: darkgoldenrod;
+      }
+    }
   }
 }

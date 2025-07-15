@@ -27,7 +27,7 @@
     border-radius: 2px;
   }
 
-  label{
+  label {
     font-weight: bold;
   }
 
@@ -41,30 +41,40 @@
   }
 
   .hidden {
-    display: none;
+    display: none !important;
   }
 
   .change {
     border: 1px solid burlywood;
     border-radius: 2px;
     background-color: transparent;
-    width: 15%;
+    min-width: 15%;
     height: 30px;
     color: burlywood;
     font-weight: bold;
+    padding: 5px;
     &:hover {
       background-color: beige;
     }
   }
 
-  .cancel{
+  .cancel {
     border-color: black;
     color: darkgray;
     font-weight: normal;
 
-    &:hover{
-        background-color: rgba(207, 207, 207,0.3);
-        
+    &:hover {
+      background-color: rgba(207, 207, 207, 0.3);
     }
+  }
+
+  .change-password {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .error-message{
+    color:red;
   }
 }

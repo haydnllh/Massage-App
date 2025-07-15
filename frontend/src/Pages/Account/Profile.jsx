@@ -3,20 +3,33 @@ import "./profile.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { updateUser } from "../../features/auth/authSlice";
 import validator from "validator";
+import { formErrors } from "../../config/formErrors";
 
 const Profile = () => {
-  const { user, isError, isLoading } = useSelector((state) => state.auth);
+  const { user, isError, isLoading, message } = useSelector(
+    (state) => state.auth
+  );
   const [change, setChange] = useState(0);
   const [firstName, setFirstName] = useState(user.first_name);
   const [lastName, setLastName] = useState(user.last_name);
   const [email, setEmail] = useState(user.email);
+  const [oldPassword, setOldPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [formError, setFormError] = useState(null);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!isLoading) {
+    if (!isLoading && !isError) {
       setFirstName(user.first_name);
       setLastName(user.last_name);
       setEmail(user.email);
+      setNewPassword("");
+      setOldPassword("");
+      setConfirmPassword("");
+      setFormError(null);
+    } else if (isError && message.message.includes("Incorrect password") && newPassword !== "") {
+      setFormError(formErrors.INCORRECT_PASSWORD);
     }
   }, [change, isLoading]);
 
@@ -25,6 +38,7 @@ const Profile = () => {
 
     const handleCancel = () => {
       setChange(0);
+      setFormError(null);
       switch (formNumber) {
         case 1:
           setFirstName(user.first_name);
@@ -35,6 +49,11 @@ const Profile = () => {
         case 3:
           setEmail(user.email);
           break;
+        case 4:
+          setNewPassword("");
+          setOldPassword("");
+          setConfirmPassword("");
+          break;
       }
     };
 
@@ -42,15 +61,30 @@ const Profile = () => {
       switch (formNumber) {
         case 1:
           dispatch(updateUser({ first_name: firstName }));
+          setChange(0);
           break;
         case 2:
           dispatch(updateUser({ last_name: lastName }));
+          setChange(0);
           break;
         case 3:
-          dispatch(updateUser({ email: email }));
+          if (validator.isEmail(email)) {
+            dispatch(updateUser({ email: email }));
+            setChange(0);
+          } else {
+            setFormError(formErrors.INVALID_EMAIL);
+          }
+          break;
+        case 4:
+          if (newPassword === confirmPassword) {
+            dispatch(
+              updateUser({ password: newPassword, oldPassword: oldPassword })
+            );
+          } else {
+            setFormError(formErrors.NON_MATCHING_PASSWORD);
+          }
           break;
       }
-      setChange(0);
     };
 
     return (
@@ -120,6 +154,13 @@ const Profile = () => {
             disabled={change !== 3}
             onChange={(e) => setEmail(e.target.value)}
           />
+          <p
+            className={`error-message ${
+              formError === formErrors.INVALID_EMAIL ? "show" : "hidden"
+            }`}
+          >
+            Please enter a valid email
+          </p>
           <button
             className={`change ${change !== 3 ? "show" : "hidden"}`}
             onClick={() => setChange(3)}
@@ -127,6 +168,52 @@ const Profile = () => {
             Change
           </button>
           <ChangeButtons formNumber={3} />
+        </div>
+      </div>
+      <div className="account-info">
+        <div className="form">
+          <div
+            className={`change-password ${change === 4 ? "show" : "hidden"}`}
+          >
+            <label>Old Password</label>
+            <input
+              value={oldPassword}
+              onChange={(e) => setOldPassword(e.target.value)}
+            />
+            <p
+              className={`error-message ${
+                formError === formErrors.INCORRECT_PASSWORD ? "show" : "hidden"
+              }`}
+            >
+              Incorrect password
+            </p>
+            <label>New Password</label>
+            <input
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+            />
+            <label>New Password (again)</label>
+            <input
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
+            <p
+              className={`error-message ${
+                formError === formErrors.NON_MATCHING_PASSWORD
+                  ? "show"
+                  : "hidden"
+              }`}
+            >
+              Passwords do not match
+            </p>
+          </div>
+          <button
+            className={`change ${change !== 4 ? "show" : "hidden"}`}
+            onClick={() => setChange(4)}
+          >
+            Change password
+          </button>
+          <ChangeButtons formNumber={4} />
         </div>
       </div>
     </div>

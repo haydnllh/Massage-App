@@ -4,14 +4,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
 import validator from "validator";
 import { useEffect } from "react";
+import { formErrors } from "../../config/formErrors";
 import "./login.scss";
 import "../Register/register.scss";
-
-const formErrors = {
-  INVALID_EMAIL: 1,
-  SHORT_PASSWORD: 2,
-  EMPTY_FIELD: 3,
-};
 
 const Login = () => {
   const dispatch = useDispatch();

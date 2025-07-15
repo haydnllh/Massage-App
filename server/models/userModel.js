@@ -22,7 +22,8 @@ const User = {
   },
 
   async update(user_id, newUser) {
-    const { first_name, last_name, email, password, isAdmin } = newUser;
+    const { first_name, last_name, email, password, oldPassword, isAdmin } =
+      newUser;
     const updates = [];
     const values = [];
     let index = 1;
@@ -42,10 +43,21 @@ const User = {
       values.push(email);
     }
 
-    if (password) {
-      const password_hash = hash(password);
-      updates.push(`password_hash = $${index++}`);
-      values.push(password_hash);
+    if (password && oldPassword) {
+      const result = await pool.query(
+        "SELECT * FROM users WHERE user_id = $1",
+        [user_id]
+      );
+      const user = result.rows[0];
+      const isMatch = await bcrypt.compare(oldPassword, user.password_hash);
+
+      if (isMatch) {
+        const password_hash = hash(password);
+        updates.push(`password_hash = $${index++}`);
+        values.push(password_hash);
+      } else {
+        throw new Error("Incorrect password");
+      }
     }
 
     if (isAdmin) {
