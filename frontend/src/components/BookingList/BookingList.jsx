@@ -1,5 +1,7 @@
 import { ItemNames } from "../../config/itemIds";
-import "./bookingList.styles.scss"
+import { CiEdit } from "react-icons/ci";
+import { MdDeleteOutline } from "react-icons/md";
+import "./bookingList.styles.scss";
 
 const BookingList = ({ data }) => {
   return (
@@ -8,9 +10,7 @@ const BookingList = ({ data }) => {
         <table>
           <thead>
             <tr>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Item</th>
+              <th>Service</th>
               <th>Date</th>
               <th>Time</th>
             </tr>
@@ -18,11 +18,19 @@ const BookingList = ({ data }) => {
           <tbody>
             {data.map((item, index) => (
               <tr key={index}>
-                <td>{item.first_name + " " + item.last_name}</td>
-                <td>{item.email}</td>
-                <td>{ItemNames[item.item_id]}</td>
-                <td>{item.booking_date.split("T")[0]}</td>
-                <td>{item.start_time + " - " + item.end_time}</td>
+                <td className="item-field">{item.item}</td>
+                <td className="date-field">{item.booking_date.split("T")[0]}</td>
+                <td className="time-field">
+                  {item.start_time + " - " + item.end_time}
+                  <div className="buttons">
+                    <button className="list-button">
+                      <CiEdit />{" "}
+                    </button>
+                    <button className="list-button">
+                      <MdDeleteOutline />
+                    </button>
+                  </div>
+                </td>
               </tr>
             ))}
           </tbody>

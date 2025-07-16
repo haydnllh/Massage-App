@@ -71,3 +71,13 @@ export function getUKMidnightToday() {
 export function addMinutes(date, minutes) {
   return new Date(date.getTime() + minutes * 60000);
 }
+
+export function getMinutesDifference(start, end) {
+  const [startH, startM] = start.split(":").map(Number);
+  const [endH, endM] = end.split(":").map(Number);
+
+  const startMinutes = startH * 60 + startM;
+  const endMinutes = endH * 60 + endM;
+
+  return endMinutes - startMinutes;
+}

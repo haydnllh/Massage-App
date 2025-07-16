@@ -4,12 +4,14 @@ const BookingStatus = require("../config/bookingStatus");
 const Booking = {
   async getUserBookings(user_Id) {
     return await pool.query(
-      `SELECT * FROM bookings WHERE user_id = ${user_Id}`
+      `SELECT booking_id, user_id, item_id, booking_date::text, start_time, end_time  FROM bookings WHERE user_id = ${user_Id}`
     );
   },
 
   async getAllBookings() {
-    return await pool.query(`SELECT * FROM bookings`);
+    return await pool.query(
+      `SELECT booking_id, user_id, item_id, booking_date::text, start_time, end_time FROM bookings`
+    );
   },
 
   async getBookingList() {
@@ -71,7 +73,7 @@ const Booking = {
 
   async removeBookings(userId, bookingIds) {
     return await pool.query(
-      "DELETE FROM bookings WHERE booking_id = ANY($1) AND user_id = $2",
+      "DELETE FROM bookings WHERE booking_id = ANY($1) AND user_id = $2 RETURNING *",
       [bookingIds, userId]
     );
   },

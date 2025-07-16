@@ -1,0 +1,73 @@
+.account-bookings-container {
+  .time-field {
+    display: flex;
+    justify-content: space-between;
+  }
+  .delete-button {
+    border: none;
+    background-color: transparent;
+    margin: 0 1px;
+    padding: 0;
+    &:hover {
+      color: darkred;
+    }
+  }
+  .popup-inner {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    gap: 20px;
+    width: 400px;
+
+    .popup-title{
+        display: flex;
+        align-items: center;
+
+        .warning{
+            color: rgb(150, 0, 0);
+        }
+    }
+
+    .delete-buttons {
+      display: flex;
+      justify-content: space-between;
+
+      button {
+        border: transparent;
+        height: 35px;
+        width: 20%;
+        font-family:'Times New Roman', Times, serif;
+        font-size: 1rem;
+        border-radius: 4px;
+      }
+      .delete{
+        background-color: lightcoral;
+        color: white;
+
+        &:hover{
+            background-color: rgb(204, 99, 99);
+        }
+      }
+      .cancel{
+        background-color: transparent;
+        border: 1px solid gray;
+        &:hover{
+            font-weight: bold;
+        }
+      }
+    }
+  }
+
+  .delete-icon{
+    font-size: medium;
+  }
+
+  th{
+    background-color: burlywood;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  td{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+}

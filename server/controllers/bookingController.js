@@ -77,7 +77,7 @@ const removeBookings = async (req, res, next) => {
 
     const result = await Booking.removeBookings(user_id, booking_ids);
     result.rowCount === booking_ids.length
-      ? res.status(201).json(result)
+      ? res.status(201).json(result.rows)
       : res.status(400).json({ message: "Cannot find booking ids" });
   } catch (err) {
     next(err);
