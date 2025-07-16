@@ -5,7 +5,7 @@ import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
 import { MdManageAccounts } from "react-icons/md";
 import { FaCalendarAlt } from "react-icons/fa";
 import { IoLogOutOutline } from "react-icons/io5";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logoutUser, reset } from "../../features/auth/authSlice";
@@ -15,6 +15,21 @@ const AccountIcon = () => {
   const [dropdown, setDropdown] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setDropdown(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const handleLogout = async () => {
     dispatch(logoutUser());
@@ -35,14 +50,18 @@ const AccountIcon = () => {
           <IoMdArrowDropdown className="spin" />
         )}
       </div>
-      <div className={`${dropdown ? "show" : "hidden"} dropdown`}>
+      <div
+        className={`${dropdown ? "show" : "hidden"} dropdown`}
+        ref={dropdownRef}
+      >
         <ul className="dropdown-list">
           <li>
             <MdManageAccounts />{" "}
             <NavLink to="/account/profile">My Profile</NavLink>
           </li>
           <li>
-            <FaCalendarAlt /> <NavLink to="/account/bookings">My Bookings</NavLink>
+            <FaCalendarAlt />{" "}
+            <NavLink to="/account/bookings">My Bookings</NavLink>
           </li>
           <li onClick={handleLogout}>
             <IoLogOutOutline /> Logout

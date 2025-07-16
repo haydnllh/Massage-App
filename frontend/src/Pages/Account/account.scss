@@ -11,6 +11,10 @@
     height: 80vh;
     gap: 10vh;
     margin-top: 10vh;
+
+    @media (max-width: 768px){
+      width: 130px;
+    }
   }
 
   .account-content {
@@ -22,7 +26,11 @@
   }
 
   .nav {
-    font-family: sans-serif;
+    font-family: "EB Garamond";
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
 
     &:hover {
       color: gray;

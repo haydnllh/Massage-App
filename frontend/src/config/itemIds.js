@@ -111,4 +111,7 @@ export const ItemPrices = Object.freeze({
     { duration: 90, price: 85 },
     { duration: 120, price: 110 },
   ],
+  11: [
+    {duration: 20, price: 20}
+  ],
 });

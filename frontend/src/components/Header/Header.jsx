@@ -6,6 +6,7 @@ import { FaBars, FaTimes } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { logoutUser, reset } from "../../features/auth/authSlice";
 import AccountIcon from "./AccountIcon";
+import ResponsiveComponent from "../ResponsiveComponent/ResponsiveDiv";
 
 const Header = () => {
   const { user } = useSelector((state) => state.auth);
@@ -34,9 +35,7 @@ const Header = () => {
   return (
     <header className="main-header">
       <Link to="/">
-        <h1 className="logo">
-          Willow wellness & sport therapy
-        </h1>
+        <h1 className="logo">Willow wellness & sport therapy</h1>
       </Link>
 
       <div className="menu-icon" onClick={toggleMenu}>
@@ -66,7 +65,23 @@ const Header = () => {
               >
                 Book Online
               </button>
-              <AccountIcon />
+              <div className="desktop-view">
+                <AccountIcon  />
+              </div>
+              <Link
+                className="mobile-view"
+                to="/account/profile"
+                onClick={() => setMenuOpen(false)}
+              >
+                Your profile
+              </Link>
+              <Link
+                className="mobile-view"
+                to="/account/bookings"
+                onClick={() => setMenuOpen(false)}
+              >
+                Your bookings
+              </Link>
             </>
           )
         ) : (

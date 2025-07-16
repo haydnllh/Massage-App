@@ -165,6 +165,16 @@ const Booking = () => {
           </button>
         </div>
         <hr />
+        <div className="choice">
+          <div className="choice-description">
+            <h3 className="title">Cupping</h3>
+            <p className="description">Description</p>
+          </div>
+          <button className="book-button" onClick={() => handleClick(11)}>
+            Book Now
+          </button>
+        </div>
+        <hr />
       </div>
 
       {popupPage === 1 ? (
@@ -176,10 +186,23 @@ const Booking = () => {
           <h1>{ItemNames[selectedItem]}</h1>
           <hr className="title-line" />
 
-          <h2>{`${ItemPrices[selectedItem][0].duration} min - ${
-            ItemPrices[selectedItem].at(-1).duration
-          } min`}</h2>
-          <h3 id="price">{`From £${ItemPrices[selectedItem][0].price}`}</h3>
+          <h2>
+            {selectedItem !== 11 &&
+              `${ItemPrices[selectedItem][0].duration} min - ${
+                ItemPrices[selectedItem].at(-1).duration
+              } min`}
+          </h2>
+          <h2>
+            {selectedItem === 11 &&
+              `${ItemPrices[selectedItem][0].duration} min`}
+          </h2>
+          {selectedItem !== 11 && (
+            <h3 id="price">{`From £${ItemPrices[selectedItem][0].price}`}</h3>
+          )}
+          {selectedItem === 11 && (
+            <h3 id="price">{`£${ItemPrices[selectedItem][0].price} or £10 if used as any part of massage 
+`}</h3>
+          )}
 
           <p id="selector-label">Select your time</p>
           <select
@@ -249,10 +272,7 @@ const Booking = () => {
             <hr />
             <p>Total price: £{items.reduce((sum, i) => sum + i.price, 0)}</p>
           </div>
-          <div
-            className="popup-bottom"
-            onClick={handleNextPage}
-          >
+          <div className="popup-bottom" onClick={handleNextPage}>
             <hr className="next-button-line" />
             <button className="next-button">Next</button>
           </div>
