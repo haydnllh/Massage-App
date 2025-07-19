@@ -12,7 +12,11 @@ a {
 .page-content{
   padding-top: 80px;
   padding-bottom: 50px;
-}
+
+  @media (max-width: 768px)
+{
+  padding-top: 66px;
+}}
 
 .container {
   width: 1200px;

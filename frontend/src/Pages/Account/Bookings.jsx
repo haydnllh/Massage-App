@@ -102,9 +102,9 @@ const Bookings = () => {
         <p>
           <small>Information of your bookings</small>
         </p>
+        {getStatus === "pending" && <img className="loading" src="/Loading.svg" alt="Loading..." />}
       </div>
-      <ul>{getStatus === "success" && <BookingList />}</ul>
-
+      {getStatus === "success" && <BookingList />}
       <Popup trigger={deletePopup} setTrigger={setDeletePopup}>
         <h2 className="popup-title">
           <IoWarningOutline className="warning" />

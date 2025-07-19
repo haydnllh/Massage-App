@@ -46,6 +46,9 @@ const Header = () => {
         <Link to="/" onClick={() => setMenuOpen(false)}>
           Home
         </Link>
+        <Link to="/#services" onClick={() => setMenuOpen(false)}>
+          Services
+        </Link>
         {user ? (
           user.isadmin ? (
             <>
@@ -66,7 +69,7 @@ const Header = () => {
                 Book Online
               </button>
               <div className="desktop-view">
-                <AccountIcon  />
+                <AccountIcon />
               </div>
               <Link
                 className="mobile-view"

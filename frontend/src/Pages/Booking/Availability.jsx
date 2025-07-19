@@ -142,8 +142,7 @@ const Availability = () => {
           {(() => {
             switch (getStatus) {
               case "pending":
-                return <h2>Loading </h2>;
-                break;
+                return <img className="loading" src="/Loading.svg" alt="Loading..." />;
               case "success":
                 return (
                   <div className="timepicker">

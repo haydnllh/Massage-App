@@ -16,12 +16,14 @@ import {
   UserProtectedRoutes,
   AdminProtectedRoutes,
 } from "./config/ProtectedRoutes";
+import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 
 const App = () => {
   return (
     <Router>
       <Header />
       <div className="page-content">
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />

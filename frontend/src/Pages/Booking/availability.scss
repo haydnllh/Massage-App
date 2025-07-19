@@ -10,7 +10,7 @@
     border: transparent;
     background-color: black;
     border-radius: 5px;
-    color: white
+    color: white;
   }
 
   @media (max-width: 768px) {
@@ -166,6 +166,17 @@
 
     .react-datepicker__time-list-item--disabled {
       display: none;
+    }
+  }
+
+  .loading {
+    width: 100px;
+    height: auto;
+    position: relative;
+    right: 12.5%;
+
+    @media (max-width: 768px) {
+      right: 0%;
     }
   }
 }
