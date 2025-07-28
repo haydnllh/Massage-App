@@ -1,4 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Libertinus+Math&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap");
 
 .booking {
   .main-image-container {
@@ -7,53 +9,53 @@
     flex-direction: column;
     overflow: hidden;
     position: relative;
-    height: 400px;
+    height: 300px;
     object-fit: cover;
-  }
+    margin-bottom: 50px;
 
-  .main-image-text-container {
-    position: absolute;
-    top: 50%;
-    left: 10%;
-    translate: 0 -50%;
-    width: 25%;
-    height: auto;
-    color: white;
-    font-size: 3.5rem;
-    background-color: rgba(61, 61, 61, 0.521);
-  }
-
-  .booking-choices {
-    display: flex;
-    flex-direction: column;
-    background-color: bisque;
-    gap: 1rem;
-    margin: 1rem 5vw;
-    padding:0 0.5rem;
-
-    .choice {
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      .choice-description {
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-        font-family: "Libertinus Math";
-      }
+    .main {
+      max-width: 100%;
+      height: 400px;
+      object-fit: cover;
+      transform: translateY(-30px);
     }
 
-    .book-button {
-      height: 2rem;
-      width: 5rem;
-      border: transparent;
-      background-color: burlywood;
-      border-radius: 5px;
+    .white-overlay {
+      background-color: rgba(255, 255, 255, 0.8);
+      z-index: 100;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      font-size: 1.5rem;
+    }
 
-      &:hover {
-        background-color: rgb(237, 197, 145);
-      }
+    .main-title {
+      position: absolute;
+      top: 50%;
+      right: 50%;
+      transform: translateX(50%) translateY(-50%);
+      font-family: "Lora";
+      color: darkgreen;
+    }
+
+    .custom-shape-divider-top-1752745054 {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      overflow: hidden;
+      line-height: 0;
+    }
+
+    .custom-shape-divider-top-1752745054 svg {
+      position: relative;
+      display: block;
+      width: calc(100% + 1.3px);
+      height: 55px;
+    }
+
+    .custom-shape-divider-top-1752745054 .shape-fill {
+      fill: bisque;
     }
   }
 
@@ -66,7 +68,6 @@
     min-height: 400px;
     height: 75vh;
     padding-bottom: 60px;
-    
 
     @media (max-width: 768px) {
       width: 100vw;
@@ -181,7 +182,7 @@
       font-size: 1.2rem;
     }
 
-    .back-button{
+    .back-button {
       position: absolute;
       top: 90%;
       border: transparent;
@@ -191,10 +192,46 @@
       border-radius: 4px;
       width: 60px;
       height: 30px;
-      &:hover{
+      &:hover {
         background-color: rgb(40, 40, 40);
       }
     }
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 0 50px;
+
+    .grid-choice {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-color: white;
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+      gap: 10px;
+      padding-bottom: 10px;
+
+      &:hover {
+        cursor: pointer;
+        .choice-image {
+          transform: scale(0.9);
+        }
+      }
+
+      .choice-image {
+        width: 100%;
+        height: 250px;
+        transition: transform 0.3s ease;
+      }
+    }
+  }
+
+  .title {
+    font-family: "Oswald";
   }
 }
 

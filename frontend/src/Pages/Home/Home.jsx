@@ -85,6 +85,7 @@ const Home = () => {
             <img
               className="service-image"
               src="chinese-medicine-3666269_1280.jpg"
+              alt="Swedish Massage"
             />
             <div className="service-text">
               <h3>Swedish Massage</h3>
@@ -101,6 +102,7 @@ const Home = () => {
             <img
               className="service-image"
               src="benjamin-wedemeyer-1rdB14ttWgQ-unsplash.jpg"
+              alt="Relaxing Massage"
             />
             <div className="service-text">
               <h3>Relaxing Massage</h3>
@@ -116,6 +118,7 @@ const Home = () => {
             <img
               className="service-image"
               src="physical-therapy-2133286_1920.jpg"
+              alt="Reflexology Foot Massage"
             />
             <div className="service-text">
               <h3>Reflexology Foot Massage</h3>
@@ -131,6 +134,7 @@ const Home = () => {
             <img
               className="service-image"
               src="head-massage-3530560_1920.jpg"
+              alt="Head Massage"
             />
             <div className="service-text">
               <h3>Head Massage</h3>
@@ -143,7 +147,11 @@ const Home = () => {
             </div>
           </div>
           <div className="service">
-            <img className="service-image" src="woman-2722936_1920.jpg" />
+            <img
+              className="service-image"
+              src="woman-2722936_1920.jpg"
+              alt="Back Neck Shoulders Head"
+            />
             <div className="service-text">
               <h3>Back Neck Shoulders Head</h3>
               <p>
@@ -155,7 +163,11 @@ const Home = () => {
             </div>
           </div>
           <div className="service">
-            <img className="service-image" src="glass-4108085_1920.jpg" />
+            <img
+              className="service-image"
+              src="glass-4108085_1920.jpg"
+              alt="Aromatherapy"
+            />
             <div className="service-text">
               <h3>Aromatherapy</h3>
               <p>
@@ -171,6 +183,7 @@ const Home = () => {
             <img
               className="service-image"
               src="young-woman-receiving-back-massage-spa-center.jpg"
+              alt="Chinese Traditional Tuina"
             />
             <div className="service-text">
               <h3>Chinese Traditional Tuina</h3>
@@ -183,7 +196,11 @@ const Home = () => {
             </div>
           </div>
           <div className="service">
-            <img className="service-image" src="Sports-massage1.jpg" />
+            <img
+              className="service-image"
+              src="Sports-massage1.jpg"
+              alt="Sports Massage"
+            />
             <div className="service-text">
               <h3>Sports Massage</h3>
               <p>
@@ -195,7 +212,11 @@ const Home = () => {
             </div>
           </div>
           <div className="service">
-            <img className="service-image" src="deep-tissue.jpeg" />
+            <img
+              className="service-image"
+              src="deep-tissue.jpeg"
+              alt="Deep Tissue Massage"
+            />
             <div className="service-text">
               <h3>Deep Tissue Massage</h3>
               <p>
@@ -210,6 +231,7 @@ const Home = () => {
             <img
               className="service-image"
               src="masseuse-applying-oil-back+(1).jpg"
+              alt="Thai Oil Massage"
             />
             <div className="service-text">
               <h3>Thai Oil Massage</h3>

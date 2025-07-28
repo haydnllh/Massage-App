@@ -59,122 +59,114 @@ const Booking = () => {
   return (
     <div className="booking">
       <div className="main-image-container">
-        <img src="back-massage.jpg" className="main"></img>
-        <div className="main-image-text-container">Book Online</div>
+        <img src="chinese-style-774902_1920.jpg" className="main" />
+        <div className="white-overlay">
+           <h1 className="main-title">Book Online</h1>
+        </div>
+        <div className="custom-shape-divider-top-1752745054">
+          <svg
+            data-name="Layer 1"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 1200 120"
+            preserveAspectRatio="none"
+          >
+            <path
+              d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
+              className="shape-fill"
+            ></path>
+          </svg>
+        </div>
       </div>
 
-      <div className="booking-choices">
-        <hr />
-        <div className="choice">
-          <div className="choice-description">
-            <h3 className="title">Swedish Massage</h3>
-            <p className="description">Description</p>
-          </div>
-          <button className="book-button" onClick={() => handleClick(1)}>
-            Book Now
-          </button>
+      <div className="grid">
+        <div className="grid-choice" onClick={() => handleClick(1)}>
+          <img
+            src="chinese-medicine-3666269_1280.jpg"
+            alt="Swedish Massage"
+            className="choice-image"
+          />
+          <h3 className="title">Swedish Massage</h3>
         </div>
-        <hr />
-        <div className="choice">
-          <div className="choice-description">
-            <h3 className="title">Relaxing Massage</h3>
-            <p className="description">Description</p>
-          </div>
-          <button className="book-button" onClick={() => handleClick(2)}>
-            Book Now
-          </button>
+        <div className="grid-choice" onClick={() => handleClick(2)}>
+          <img
+            src="benjamin-wedemeyer-1rdB14ttWgQ-unsplash.jpg"
+            alt="Relaxing Massage"
+            className="choice-image"
+          />
+          <h3 className="title">Relaxing Massage</h3>
         </div>
-        <hr />
-        <div className="choice">
-          <div className="choice-description">
-            <h3 className="title">Reflexology Foot Massage</h3>
-            <p className="description">Description</p>
-          </div>
-          <button className="book-button" onClick={() => handleClick(3)}>
-            Book Now
-          </button>
+        <div className="grid-choice" onClick={() => handleClick(3)}>
+          <img
+            src="physical-therapy-2133286_1920.jpg"
+            alt="Reflexology Foot Massage"
+            className="choice-image"
+          />
+          <h3 className="title">Reflexology Foot Massage</h3>
         </div>
-        <hr />
-        <div className="choice">
-          <div className="choice-description">
-            <h3 className="title">Head Massage</h3>
-            <p className="description">Description</p>
-          </div>
-          <button className="book-button" onClick={() => handleClick(4)}>
-            Book Now
-          </button>
+        <div className="grid-choice" onClick={() => handleClick(4)}>
+          <img
+            src="head-massage-3530560_1920.jpg"
+            alt="Head Massage"
+            className="choice-image"
+          />
+          <h3 className="title">Head Massage</h3>
         </div>
-        <hr />
-        <div className="choice">
-          <div className="choice-description">
-            <h3 className="title">Back Neck Shoulders Head</h3>
-            <p className="description">Description</p>
-          </div>
-          <button className="book-button" onClick={() => handleClick(5)}>
-            Book Now
-          </button>
+        <div className="grid-choice" onClick={() => handleClick(5)}>
+          <img
+            src="woman-2722936_1920.jpg"
+            alt="Back Neck Shoulders Head"
+            className="choice-image"
+          />
+          <h3 className="title">Back Neck Shoulders Head</h3>
         </div>
-        <hr />
-        <div className="choice">
-          <div className="choice-description">
-            <h3 className="title">Aromatherapy</h3>
-            <p className="description">Description</p>
-          </div>
-          <button className="book-button" onClick={() => handleClick(6)}>
-            Book Now
-          </button>
+        <div className="grid-choice" onClick={() => handleClick(6)}>
+          <img
+            src="glass-4108085_1920.jpg"
+            alt="Aromatherapye"
+            className="choice-image"
+          />
+          <h3 className="title">Aromatherapy</h3>
         </div>
-        <hr />
-        <div className="choice">
-          <div className="choice-description">
-            <h3 className="title">Chinese Traditional Tuina</h3>
-            <p className="description">Description</p>
-          </div>
-          <button className="book-button" onClick={() => handleClick(7)}>
-            Book Now
-          </button>
+        <div className="grid-choice" onClick={() => handleClick(7)}>
+          <img
+            src="young-woman-receiving-back-massage-spa-center.jpg"
+            alt="Chinese Traditional Tuina"
+            className="choice-image"
+          />
+          <h3 className="title">Chinese Traditional Tuina</h3>
         </div>
-        <hr />
-        <div className="choice">
-          <div className="choice-description">
-            <h3 className="title">Sports Massage</h3>
-            <p className="description">Description</p>
-          </div>
-          <button className="book-button" onClick={() => handleClick(8)}>
-            Book Now
-          </button>
+        <div className="grid-choice" onClick={() => handleClick(8)}>
+          <img
+            src="Sports-massage1.jpg"
+            alt="Sports Massage"
+            className="choice-image"
+          />
+          <h3 className="title">Sports Massage</h3>
         </div>
-        <hr />
-        <div className="choice">
-          <div className="choice-description">
-            <h3 className="title">Deep Tissue Massage</h3>
-            <p className="description">Description</p>
-          </div>
-          <button className="book-button" onClick={() => handleClick(9)}>
-            Book Now
-          </button>
+        <div className="grid-choice" onClick={() => handleClick(9)}>
+          <img
+            src="deep-tissue.jpeg"
+            alt="Deep Tissue Massage"
+            className="choice-image"
+          />
+          <h3 className="title">Deep Tissue Massage</h3>
         </div>
-        <hr />
-        <div className="choice">
-          <div className="choice-description">
-            <h3 className="title">Thai Oil Massage</h3>
-            <p className="description">Description</p>
-          </div>
-          <button className="book-button" onClick={() => handleClick(10)}>
-            Book Now
-          </button>
+        <div className="grid-choice" onClick={() => handleClick(10)}>
+          <img
+            src="masseuse-applying-oil-back+(1).jpg"
+            alt="Thai Oil Massage"
+            className="choice-image"
+          />
+          <h3 className="title">Thai Oil Massage</h3>
         </div>
-        <hr />
-        <div className="choice">
-          <div className="choice-description">
-            <h3 className="title">Cupping</h3>
-            <p className="description">Description</p>
-          </div>
-          <button className="book-button" onClick={() => handleClick(11)}>
-            Book Now
-          </button>
+        <div className="grid-choice" onClick={() => handleClick(11)}>
+          <img
+            src="katherine-hanlon-Pdea8oxLHkU-unsplash.jpg"
+            alt="Cupping"
+            className="choice-image"
+          />
+          <h3 className="title">Cupping</h3>
         </div>
-        <hr />
       </div>
 
       {popupPage === 1 ? (
