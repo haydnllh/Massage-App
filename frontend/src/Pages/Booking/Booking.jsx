@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, useLocation } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ItemIds, ItemNames, ItemPrices } from "../../config/itemIds";
 import { setItemId } from "../../features/booking/bookingSlice";
 import "./booking.scss";
@@ -18,6 +18,10 @@ const Booking = () => {
   const [items, setItems] = useState([]);
   const [selectedTimePrice, setSelectedTimePrice] = useState("");
 
+  useEffect(() => {
+    location.state && handleClick(location.state);
+  }, []);
+
   const reset = () => {
     setButtonPopup(false);
     setSelectedBooking(1);
@@ -27,8 +31,6 @@ const Booking = () => {
   };
 
   const handleClick = (item_id) => {
-    //dispatch(setItemId(item_id));
-    //user ? navigate("/bookings/availability") : navigate("/login");
     setButtonPopup(true);
     setSelectedBooking(item_id);
   };
@@ -61,7 +63,7 @@ const Booking = () => {
       <div className="main-image-container">
         <img src="chinese-style-774902_1920.jpg" className="main" />
         <div className="white-overlay">
-           <h1 className="main-title">Book Online</h1>
+          <h1 className="main-title">Book Online</h1>
         </div>
         <div className="custom-shape-divider-top-1752745054">
           <svg

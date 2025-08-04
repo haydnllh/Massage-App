@@ -11,6 +11,7 @@
   position: fixed;
   z-index: 1000;
   width: 100%;
+  height: 80px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 
   .logo {
@@ -89,8 +90,17 @@
     font-weight: bold;
 
     &:hover {
-      background-color: rgb(235, 200, 134);
+      animation: fadeInBackground 0.5s ease forwards
     }
+
+    @keyframes fadeInBackground {
+    from {
+      background-color: rgb(255, 217, 147);
+    }
+    to {
+      background-color: darkgreen;
+    }
+  }
 
     @media (max-width: 768px) {
       background: none;
@@ -102,10 +112,13 @@
       margin: 0 auto;
       font-size: 1rem;
       font-weight: normal;
-      font-size: 1.3rem;
+      font-size: 1.2rem;
+      color: #333;
+      
       &:hover {
         background-color: beige;
         font-family: "Oswald";
+        animation: none;
       }
     }
   }
@@ -145,4 +158,9 @@
   .desktop-view {
     display: none;
   }
+}
+
+.logout-button {
+  font-family: "Oswald";
+  font-size: 1rem;
 }

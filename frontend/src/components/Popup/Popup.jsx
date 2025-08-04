@@ -11,6 +11,7 @@ export default function Popup(props) {
 
     return () => {
       document.body.style.overflow = "";
+      if (props.onClose) props.onClose();
     };
   }, [props.trigger]);
 
@@ -21,10 +22,9 @@ export default function Popup(props) {
           className="close-btn"
           onClick={() => {
             props.setTrigger(false);
-            if(props.onClose) props.onClose();
           }}
         >
-          <FaTimes id="popup-cross"/>
+          <FaTimes id="popup-cross" />
         </button>
         {props.children}
       </div>

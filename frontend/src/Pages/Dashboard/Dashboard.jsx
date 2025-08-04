@@ -27,7 +27,6 @@ const Dashboard = () => {
 
   return (
     <div>
-      <h1 className="heading center">Dashboard</h1>
       <Calendar />
     </div>
   );

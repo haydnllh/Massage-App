@@ -95,7 +95,12 @@ const Home = () => {
                 Ideal for those seeking gentle, calming relief and total body
                 relaxation.
               </p>
-              <button className="book-button">Book Online</button>
+              <button
+                className="book-button"
+                onClick={() => navigate("./bookings", { state: 1 })}
+              >
+                Book Online
+              </button>
             </div>
           </div>
           <div className="service">
@@ -111,7 +116,12 @@ const Home = () => {
                 nervous system, ease tension, and help you fully unwind. Perfect
                 for stress relief and deep mental relaxation.
               </p>
-              <button className="book-button">Book Online</button>
+              <button
+                className="book-button"
+                onClick={() => navigate("./bookings", { state: 2 })}
+              >
+                Book Online
+              </button>
             </div>
           </div>
           <div className="service">
@@ -127,7 +137,12 @@ const Home = () => {
                 points, stimulating your body’s natural healing and promoting
                 overall balance and relaxation.
               </p>
-              <button className="book-button">Book Online</button>
+              <button
+                className="book-button"
+                onClick={() => navigate("./bookings", { state: 3 })}
+              >
+                Book Online
+              </button>
             </div>
           </div>
           <div className="service">
@@ -143,7 +158,12 @@ const Home = () => {
                 and shoulders—helping reduce stress, ease headaches, and leave
                 you feeling refreshed and clear-headed.
               </p>
-              <button className="book-button">Book Online</button>
+              <button
+                className="book-button"
+                onClick={() => navigate("./bookings", { state: 4 })}
+              >
+                Book Online
+              </button>
             </div>
           </div>
           <div className="service">
@@ -159,7 +179,12 @@ const Home = () => {
                 body—perfect for relieving tight muscles, reducing headaches,
                 and melting away stress from everyday life.
               </p>
-              <button className="book-button">Book Online</button>
+              <button
+                className="book-button"
+                onClick={() => navigate("./bookings", { state: 5 })}
+              >
+                Book Online
+              </button>
             </div>
           </div>
           <div className="service">
@@ -176,7 +201,12 @@ const Home = () => {
                 therapeutic scents to calm the mind, ease tension, and restore
                 balance.
               </p>
-              <button className="book-button">Book Online</button>
+              <button
+                className="book-button"
+                onClick={() => navigate("./bookings", { state: 6 })}
+              >
+                Book Online
+              </button>
             </div>
           </div>
           <div className="service">
@@ -192,7 +222,12 @@ const Home = () => {
                 stretching, and rhythmic techniques to unblock energy flow,
                 relieve pain, and restore balance throughout the body.
               </p>
-              <button className="book-button">Book Online</button>
+              <button
+                className="book-button"
+                onClick={() => navigate("./bookings", { state: 7 })}
+              >
+                Book Online
+              </button>
             </div>
           </div>
           <div className="service">
@@ -208,7 +243,12 @@ const Home = () => {
                 lifestyles—relieving muscle tension, improving flexibility, and
                 speeding up recovery before or after physical activity.
               </p>
-              <button className="book-button">Book Online</button>
+              <button
+                className="book-button"
+                onClick={() => navigate("./bookings", { state: 8 })}
+              >
+                Book Online
+              </button>
             </div>
           </div>
           <div className="service">
@@ -224,7 +264,12 @@ const Home = () => {
                 connective tissue to relieve chronic tension, improve mobility,
                 and reduce pain.
               </p>
-              <button className="book-button">Book Online</button>
+              <button
+                className="book-button"
+                onClick={() => navigate("./bookings", { state: 9 })}
+              >
+                Book Online
+              </button>
             </div>
           </div>
           <div className="service">
@@ -240,7 +285,12 @@ const Home = () => {
                 smooth glide of warm oils, designed to relax muscles, improve
                 circulation, and restore energy flow.
               </p>
-              <button className="book-button">Book Online</button>
+              <button
+                className="book-button"
+                onClick={() => navigate("./bookings", { state: 10 })}
+              >
+                Book Online
+              </button>
             </div>
           </div>
         </div>

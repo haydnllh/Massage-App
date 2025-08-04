@@ -16,7 +16,7 @@ const Booking = {
 
   async getBookingList() {
     return await pool.query(
-      "SELECT first_name, last_name, email, booking_date, item_id, start_time, end_time FROM bookings LEFT JOIN users on users.user_id = bookings.user_id"
+      "SELECT first_name, last_name, email, booking_date::text, item_id, start_time, end_time, description FROM bookings LEFT JOIN users on users.user_id = bookings.user_id"
     );
   },
 
@@ -36,7 +36,13 @@ const Booking = {
 
     let i = 1;
     for (const booking of bookingsList) {
-      const { item_id, booking_date, start_time, end_time } = booking;
+      const {
+        item_id,
+        booking_date,
+        start_time,
+        end_time,
+        description = "",
+      } = booking;
 
       values.push(
         user_id,
@@ -46,13 +52,14 @@ const Booking = {
         end_time,
         "confirmed", // or BookingStatus.CONFIRMED if it's a string
         time,
-        time
+        time,
+        description
       );
 
       placeholders.push(
         `($${i}, $${i + 1}, $${i + 2}, $${i + 3}, $${i + 4}, $${i + 5}, $${
           i + 6
-        }, $${i + 7})`
+        }, $${i + 7}, $${i + 8})`
       );
 
       i += 8;
@@ -60,7 +67,7 @@ const Booking = {
 
     const query = `
     INSERT INTO bookings (
-      user_id, item_id, booking_date, start_time, end_time, status, created_at, updated_at
+      user_id, item_id, booking_date, start_time, end_time, status, created_at, updated_at, description
     )
     VALUES ${placeholders.join(", ")}
     RETURNING booking_id, user_id, item_id, booking_date::text, start_time, end_time;

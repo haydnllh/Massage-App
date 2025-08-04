@@ -14,10 +14,10 @@
     margin-bottom: 50px;
 
     .main {
+      display: block;
       max-width: 100%;
-      height: 400px;
+      height: 100%;
       object-fit: cover;
-      transform: translateY(-30px);
     }
 
     .white-overlay {
@@ -204,6 +204,11 @@
     gap: 20px;
     padding: 0 50px;
 
+    @media (max-width: 768px){
+      grid-template-columns: repeat(2, 1fr);
+      padding: 0 20px;
+    }
+
     .grid-choice {
       display: flex;
       flex-direction: column;
@@ -226,12 +231,21 @@
         width: 100%;
         height: 250px;
         transition: transform 0.3s ease;
+
+        @media(max-width: 768px){
+          height:100px;
+        }
       }
     }
   }
 
   .title {
     font-family: "Oswald";
+    color: darkgreen;
+
+    @media(max-width: 768px){
+      font-size: 0.8rem;
+    }
   }
 }
 
