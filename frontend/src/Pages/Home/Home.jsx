@@ -305,11 +305,13 @@ const Home = () => {
 
       <div className="about-us">
         <h1>About Us</h1>
-        <p>
+        <p className="about-us-text">
+          <br />
           Willow therapist Yan is trained in many forms of traditional Chinese
           Medicine Therapy and professional massage courses. My vast knowledge
           on the human body structure will help you customize your session
           depending on your needs and requirements.
+          <br />
           <br />I have been working in London and Birmingham for about 6 years
           and in therapeutic massage and cosmetology for over 12 years in China.
           Now I have moved to a new location in Kenilworth. My new premises will
