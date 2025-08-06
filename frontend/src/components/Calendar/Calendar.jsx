@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo, useCallback } from "react";
-import { Calendar, dayjsLocalizer } from "react-big-calendar";
+import { dayjsLocalizer } from "react-big-calendar";
 import { fetchAllBookings } from "../../api/bookings";
 import dayjs from "dayjs";
 import "react-big-calendar/lib/css/react-big-calendar.css";
@@ -17,7 +17,7 @@ import MemoCalendar from "./MemoCalendar";
 
 const localizer = dayjsLocalizer(dayjs);
 
-const MyCalendar = () => {
+const Calendar = () => {
   const { user } = useSelector((state) => state.auth);
 
   const [events, setEvents] = useState([]);
@@ -177,4 +177,4 @@ const MyCalendar = () => {
   );
 };
 
-export default MyCalendar;
+export default Calendar;
